@@ -1,10 +1,13 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import strings from '@/constants/strings';
 
 class MenuStore {
   constructor() {
     this.activeTab = strings.menu.states.list;
+    this.visibility = true;
     makeAutoObservable(this);
+
+    this.toggleVisibility = this.toggleVisibility.bind(this);
   }
 
   setActiveTab(tab) {
@@ -13,8 +16,18 @@ class MenuStore {
     }
   }
 
+  toggleVisibility(visibility = this.visibility) {
+    runInAction(() => {
+      this.visibility = !visibility;
+    });
+  }
+
   getActiveTab() {
     return this.activeTab;
+  }
+
+  getVisibility() {
+    return this.visibility;
   }
 }
 

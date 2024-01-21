@@ -1,6 +1,21 @@
 {
-  "title": {
-    "name": "Имущественный комплекс",
-    "university": "МГРИ"
+  "menu": {
+    "tooltip": {
+      "visibility": {
+        "visible": "Скрыть меню",
+        "hidden": "Показать меню"
+      }
+    },
+    "title": {
+      "name": "Имущественный комплекс",
+      "university": "МГРИ"
+    },
+    "content": {
+      "list": {
+        "search": {
+          "placeholder": "Поиск"
+        }
+      }
+    }
   }
 }
