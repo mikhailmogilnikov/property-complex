@@ -1,0 +1,18 @@
+name: Build
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  Validator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+      - name: Install Depenpencies
+        run: make install
+      - name: Run Tests
+        run: make test
+      - name: Run Linter
+        run: make lint
