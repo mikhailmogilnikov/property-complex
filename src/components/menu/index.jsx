@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import icons from '@/constants/icons';
 import MgriLogo from '../../assets/MgriLogo';
 import Chip from '../primitives/Chip';
-import { useStore } from '@/stores/stores';
+import { useStore } from '@/store/store';
 import strings from '@/constants/strings';
 import Content from './content';
 import transitions from '@/constants/transitions';

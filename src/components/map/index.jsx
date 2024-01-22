@@ -12,18 +12,7 @@ function Map() {
   const [svgContent, setSvgContent] = useState('');
   const [dataRooms] = useState(['415b', '415a', '417']);
 
-  const { resolvedTheme } = useTheme();
-
-  const isDark = resolvedTheme === 'dark';
-
-  const colors = {
-    stroke: isDark ? '#fff' : '#000',
-    text: isDark ? '#fff' : '#000',
-    fill: isDark ? '#000' : '#fff',
-    hover: {
-      fill: isDark ? 'rgba(255, 81, 3, 1)' : 'rgba(255, 81, 3, 0.8)',
-    } 
-  };
+  const { theme, resolvedTheme } = useTheme();
 
   useEffect(() => {
     SvgImport('/locations/4th-floor.svg').then((data) => setSvgContent(data));
@@ -31,6 +20,17 @@ function Map() {
 
   useEffect(() => {
     if (svgContent === '') return;
+
+    const isDark = resolvedTheme === 'dark';
+
+    const colors = {
+      stroke: isDark ? '#fff' : '#000',
+      text: isDark ? '#fff' : '#000',
+      fill: isDark ? '#000' : '#fff',
+      hover: {
+        fill: isDark ? 'rgba(255, 81, 3, 1)' : 'rgba(255, 81, 3, 0.8)',
+      } 
+    };
 
     const svg = d3.select('svg');
     const g = svg.select('g');
@@ -42,11 +42,17 @@ function Map() {
       .attr('cursor', 'pointer');
 
     svg.selectAll('path[stroke]').attr('stroke', colors.stroke);
-    svg.selectAll('path[fill]').attr('fill', colors.fill);
+    svg.selectAll('path[fill]')
+    .attr('fill', colors.fill);
+    
 
     const rooms = g.selectAll('g').filter(function () {
       return dataRooms.includes(this.getAttribute('class'));
     });
+
+    // animations
+
+    
 
     rooms.on('click', () => {
       console.log('click');
@@ -80,12 +86,25 @@ function Map() {
         getPathFill(this);
       })
       .on('mouseover', function () {
-        getPathFill(this).attr('fill', colors.hover.fill);
+        getPathFill(this)
+          .transition()
+          .duration(100)
+          .ease(d3.easeLinear)
+          .attr('fill', colors.hover.fill);
+
+          // .attr("transition", "all 750ms ease-in-out")
       })
       .on('mouseout', function () {
-        getPathFill(this).attr('fill', colors.fill);
+        getPathFill(this)
+          .transition()
+          .duration(100)
+          .ease(d3.easeLinear)
+          .attr('fill', colors.fill);
+
+
+          // .attr("transition", "all 1000ms ease-in-out")
       });
-  }, [svgContent]);
+  }, [svgContent, theme]);
 
   return (
     <div className='w-full h-[100dvh] cursor-grab'>
