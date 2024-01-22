@@ -7,8 +7,8 @@ export default function translation() {
     menu: {
       tooltip: {
         visibility: {
-          visible: 'Скрыть меню',
-          hidden: 'Показать меню',
+          visible: menu('tooltip.visibility.visible'),
+          hidden: menu('tooltip.visibility.hidden'),
         },
       },
       title: {
