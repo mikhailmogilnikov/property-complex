@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="731" height="228" fill="none" viewBox="0 0 731 228">
+  <g class="rooms">
+    <g class="415a">
+      <path fill="#fff" d="M6 142h158v62H6v-62Z"/>
+      <path stroke="#000" stroke-width="12" d="M6 142h158v62H6v-62Z"/>
+      <path stroke="#000" stroke-width="4" d="M150 159h28" class="door"/>
+    </g>
+    <g class="415b">
+      <path fill="#fff" d="M6 6h248v132H6V6Z"/>
+      <path stroke="#000" stroke-width="12" d="M6 6h248v132H6V6Z"/>
+      <path stroke="#000" stroke-width="4" d="M207 151v-28" class="door"/>
+    </g>
+    <g class="417">
+      <path fill="#fff" d="M254 6h92v132h-92V6Z"/>
+      <path stroke="#000" stroke-width="12" d="M254 6h92v132h-92V6Z"/>
+      <path stroke="#000" stroke-width="4" d="M308 151v-28" class="door"/>
+      <g class="417addroom">
+        <path stroke="#000" stroke-width="4" d="M279 141V89" class="Line 4"/>
+        <path stroke="#000" stroke-width="5" d="M255 91.5h24" class="Line 5"/>
+      </g>
+    </g>
+    <g class="419">
+      <path fill="#fff" d="M343 6h135v132H343V6Z"/>
+      <path stroke="#000" stroke-width="12" d="M343 6h135v132H343V6Z"/>
+      <path stroke="#000" stroke-width="2" d="M458 152v-13" class="minidoor"/>
+    </g>
+    <g class="break-419">
+      <path fill="#fff" d="M423 143.997h37v84.006h-37z"/>
+      <path stroke="#000" stroke-width="4" d="M423 190h37" class="door"/>
+      <path stroke="#000" stroke-width="3" d="M442 228.003v-84.006" class="br"/>
+    </g>
+    <g class="421">
+      <path fill="#fff" d="M477 6h75v132h-75V6Z"/>
+      <path stroke="#000" stroke-width="12" d="M477 6h75v132h-75V6Z"/>
+      <path stroke="#000" stroke-width="2" d="M499 152v-13" class="minidoor"/>
+    </g>
+    <g class="423">
+      <path fill="#fff" d="M552 6h173v132H552V6Z"/>
+      <path stroke="#000" stroke-width="12" d="M552 6h173v132H552V6Z"/>
+      <path stroke="#000" stroke-width="4" d="M587 150v-28" class="door"/>
+      <path stroke="#000" stroke-width="2" d="M638 140v-13m70 13v-13" class="minidoor"/>
+    </g>
+  </g>
+</svg>
