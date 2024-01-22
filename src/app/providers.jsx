@@ -7,7 +7,7 @@ import StoreProvider from '@/providers/store.provider';
 export default function Providers({ children }) {
   return (
     <NextUIProvider>
-      <ThemeProvider attribute='class' defaultTheme='dark' enableSystem='false'>
+      <ThemeProvider attribute='class' defaultTheme='dark'>
         <StoreProvider>{children}</StoreProvider>
       </ThemeProvider>
     </NextUIProvider>

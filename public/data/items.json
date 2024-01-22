@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1128304,
+    "roomId": 1,
+    "name": "Принтер HP LaserJet Enterprise M712dn (формат A3)",
+    "lifetime": 108,
+    "cost": 63750.4,
+    "comment": "2 картриджа"
+  },
+  {
+    "id": 1119451,
+    "roomId": 1,
+    "name": "Принтер Kyocera FS-C8500DN A3 в компл. с каб. USB 2.0 HAMA AM/BM, 1.8 м.",
+    "lifetime": 143,
+    "cost": 130080,
+    "comment": "3 картриджа"
+  },
+  {
+    "id": 1119449,
+    "roomId": 1,
+    "name": "Принтер Kyocera FS-C8500DN A3 в компл. с каб. USB 2.0 HAMA AM/BM, 1.8 м.",
+    "lifetime": 143,
+    "cost": 130080,
+    "comment": ""
+  },
+  {
+    "id": 1118195,
+    "roomId": 2,
+    "name": "Принтер Kyocera FS-C8500DN",
+    "lifetime": 144,
+    "cost": 120000,
+    "comment": ""
+  },
+  {
+    "id": 1123744,
+    "roomId": 3,
+    "name": "МФУ RICOH Aficio MP 171LN",
+    "lifetime": 120,
+    "cost": 40238.3,
+    "comment": ""
+  },
+  {
+    "id": 1110762,
+    "roomId": 3,
+    "name": "МФУ Aficio MPС3000 в компл.с автоподатчиком, финишером SR3010, подст.с лотком 2x500 PB3000 и транспорт.мост BRIDGE UNIT TYPE BU",
+    "lifetime": 204,
+    "cost": 398613.44,
+    "comment": ""
+  },
+  {
+    "id": 1120517,
+    "roomId": 2,
+    "name": "Компьютер DEPO Neos 430MN Intel Core2 Duo E7500 250 GB HDD SATA Gb DVD",
+    "lifetime": 84,
+    "cost": 18134.25,
+    "comment": ""
+  }
+]
