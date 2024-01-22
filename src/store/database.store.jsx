@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, toJS } from 'mobx';
 
 class DatabaseStore {
   constructor() {
@@ -16,11 +16,11 @@ class DatabaseStore {
   }
 
   getRooms() {
-    return this.rooms;
+    return toJS(this.rooms);
   }
 
   getItems() {
-    return this.items;
+    return toJS(this.items);
   }
 }
 

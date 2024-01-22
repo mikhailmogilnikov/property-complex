@@ -1,11 +1,11 @@
 import { Input } from '@nextui-org/input';
 import { ScrollShadow } from '@nextui-org/scroll-shadow';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import icons from '@/constants/icons';
+import { useStore } from '@/store/store';
+import findSubstring from '@/utility/findSubstring';
 
 function Search({ searchValue, setSearchValue, translate }) {
-  
-  console.log(searchValue);
 
   return (
     <Input
@@ -46,7 +46,25 @@ function Search({ searchValue, setSearchValue, translate }) {
 }
 
 function List({ translate }) {
+  const { databaseStore } = useStore();
   const [searchValue, setSearchValue] = useState('');
+  // const [foundList, setFoundList] = useState([]);
+
+  useEffect(() => {
+    const roomList = databaseStore.getRooms();
+    const itemList = databaseStore.getItems();
+    const normalize = searchValue.toString().toLowerCase();
+
+    // const foundRooms = findSubstring(searchValue.toString(), roomList, "name");
+
+    console.log([
+      ...findSubstring(normalize, roomList, "name"),
+      ...findSubstring(normalize, roomList, "owner"),
+      ...findSubstring(normalize, itemList, "id"),
+      ...findSubstring(normalize, itemList, "name", true),
+    ]);
+    // setFoundList(foundRooms);
+  }, [searchValue])
 
   return (
     <div className='w-full h-full flex flex-col'>

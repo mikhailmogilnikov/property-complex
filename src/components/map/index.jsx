@@ -7,12 +7,13 @@ import * as d3 from 'd3';
 import { createElement, useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import SvgImport from '@/utility/svgImport';
+import { useStore } from '@/store/store';
 
 function Map() {
   const [svgContent, setSvgContent] = useState('');
-  const [dataRooms] = useState(['415b', '415a', '417']);
 
   const { theme, resolvedTheme } = useTheme();
+  const { databaseStore } = useStore();
 
   useEffect(() => {
     SvgImport('/locations/4th-floor.svg').then((data) => setSvgContent(data));
@@ -32,6 +33,8 @@ function Map() {
       } 
     };
 
+    console.log({theme, resolvedTheme, isDark, colors});
+
     const svg = d3.select('svg');
     const g = svg.select('g');
 
@@ -42,20 +45,12 @@ function Map() {
       .attr('cursor', 'pointer');
 
     svg.selectAll('path[stroke]').attr('stroke', colors.stroke);
-    svg.selectAll('path[fill]')
-    .attr('fill', colors.fill);
-    
+    svg.selectAll('path[fill]').attr('fill', colors.fill);
 
+    const roomNames = databaseStore.getRooms().map(i => i.name);
+    
     const rooms = g.selectAll('g').filter(function () {
-      return dataRooms.includes(this.getAttribute('class'));
-    });
-
-    // animations
-
-    
-
-    rooms.on('click', () => {
-      console.log('click');
+      return roomNames.includes(this.getAttribute('class'));
     });
 
     rooms
@@ -83,7 +78,16 @@ function Map() {
 
     rooms
       .on('click', function () {
-        getPathFill(this);
+        const room = databaseStore
+          .getRooms()
+          .find(r => r.name === this.getAttribute('class'));
+        
+        const roomItems = databaseStore
+          .getItems()
+          .filter(item => item.roomId === room.id);
+        
+        console.log({room, roomItems});
+        // menuStore.setActiveTab(null);
       })
       .on('mouseover', function () {
         getPathFill(this)
@@ -91,8 +95,6 @@ function Map() {
           .duration(100)
           .ease(d3.easeLinear)
           .attr('fill', colors.hover.fill);
-
-          // .attr("transition", "all 750ms ease-in-out")
       })
       .on('mouseout', function () {
         getPathFill(this)
@@ -100,9 +102,6 @@ function Map() {
           .duration(100)
           .ease(d3.easeLinear)
           .attr('fill', colors.fill);
-
-
-          // .attr("transition", "all 1000ms ease-in-out")
       });
   }, [svgContent, theme]);
 
