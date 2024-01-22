@@ -51,6 +51,30 @@
     "id": 1120517,
     "roomId": 2,
     "name": "Компьютер DEPO Neos 430MN Intel Core2 Duo E7500 250 GB HDD SATA Gb DVD",
+    "lifetime": 120,
+    "cost": 18134.25,
+    "comment": ""
+  },
+  {
+    "id": 1123335,
+    "roomId": 2,
+    "name": "Многофункциональное устройство RICOH Aficio MP 2852SP",
+    "lifetime": 120,
+    "cost": 193568.51,
+    "comment": ""
+  },
+  {
+    "id": 1118267,
+    "roomId": 1,
+    "name": "Интерактивная доска 50'' IQBoard PS S050B  USB RS 13 кг",
+    "lifetime": 144,
+    "cost": 49990,
+    "comment": ""
+  },
+  {
+    "id": 1120536,
+    "roomId": 3,
+    "name": "Компьютер DEPO Neos 430MN Intel Core2 Duo E7500 250 GB HDD SATA Gb DVD",
     "lifetime": 84,
     "cost": 18134.25,
     "comment": ""
