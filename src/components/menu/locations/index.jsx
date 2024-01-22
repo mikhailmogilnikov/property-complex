@@ -21,7 +21,7 @@ function Location({ name }) {
       isDisabled={disabled}
       className={clsx(
         'h-12 font-semibold bg-transparent dark:bg-white/10 rounded-2xl shadow-small flex',
-        { 'border-2 border-black': active },
+        { 'border-2 border-black dark:border-white': active },
       )}
     >
       <h5 className=''>{name}</h5>
@@ -31,10 +31,13 @@ function Location({ name }) {
 
 function Locations() {
   return (
-    <div className='grid grid-cols-2 gap-4 px-6 py-2'>
-      {locs.map((loc) => (
-        <Location key={`id-${loc}`} name={loc} />
-      ))}
+    <div className='flex flex-col gap-4'>
+      {/* <h2 className='text-3xl font-semibold px-6 mb-2'>Локации</h2> */}
+      <div className='grid grid-cols-2 gap-4 px-6 py-2'>
+        {locs.map((loc) => (
+          <Location key={`id-${loc}`} name={loc} />
+        ))}
+      </div>
     </div>
   );
 }

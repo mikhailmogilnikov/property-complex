@@ -12,9 +12,9 @@ function Map() {
   const [svgContent, setSvgContent] = useState('');
   const [dataRooms] = useState(['415b', '415a', '417']);
 
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
 
-  const isDark = theme === 'dark';
+  const isDark = resolvedTheme === 'dark';
 
   const colors = {
     stroke: isDark ? '#fff' : '#000',

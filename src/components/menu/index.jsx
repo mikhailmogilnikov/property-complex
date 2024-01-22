@@ -4,6 +4,8 @@ import { Tooltip } from '@nextui-org/tooltip';
 import clsx from 'clsx';
 import { observer } from 'mobx-react-lite';
 import { motion } from 'framer-motion';
+import { useTheme } from 'next-themes';
+import { useEffect } from 'react';
 import icons from '@/constants/icons';
 import MgriLogo from '../../assets/MgriLogo';
 import Chip from '../primitives/Chip';
@@ -119,6 +121,20 @@ const Menu = observer(({ translate }) => {
     open: { opacity: 1, x: 0, scale: 1 },
     closed: { opacity: 1, x: '-110%', scale: 1 },
   };
+
+  const { resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    if (resolvedTheme === 'dark') {
+      document
+        .querySelector('meta[name="theme-color"]')
+        .setAttribute('content', '#000000');
+    } else {
+      document
+        .querySelector('meta[name="theme-color"]')
+        .setAttribute('content', '#ffffff');
+    }
+  }, [resolvedTheme]);
 
   return (
     <motion.aside
