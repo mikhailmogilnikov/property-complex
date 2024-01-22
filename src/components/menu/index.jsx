@@ -98,7 +98,7 @@ function Hider({ visibility, translate, toggleVisibility }) {
         type='button'
         aria-label='hide menu'
         onClick={() => toggleVisibility()}
-        className='absolute left-[24rem] top-[calc(50%-20px)] w-10 h-10 flex justify-center items-center opacity-30 hover:opacity-60 transition-opacity'
+        className='absolute left-[24rem] top-[calc(50%-20px)] w-10 h-10 hidden lg:flex justify-center items-center opacity-30 hover:opacity-60 transition-opacity'
       >
         <div className='w-1 h-full rounded-full bg-black dark:bg-white ' />
       </button>
@@ -115,9 +115,9 @@ const Menu = observer(({ translate }) => {
   const visibility = menuStore.getVisibility();
 
   const animationVariants = {
-    initial: { opacity: 0, x: '-110%' },
-    open: { opacity: 1, x: 0 },
-    closed: { opacity: 1, x: '-110%' },
+    initial: { opacity: 0, x: '-110%', scale: 0.2 },
+    open: { opacity: 1, x: 0, scale: 1 },
+    closed: { opacity: 1, x: '-110%', scale: 1 },
   };
 
   return (

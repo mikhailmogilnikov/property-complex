@@ -3,9 +3,8 @@ import { ScrollShadow } from '@nextui-org/scroll-shadow';
 import { useState } from 'react';
 import icons from '@/constants/icons';
 
-function Search({ translate }) {
-  const [searchValue, setSearchValue] = useState('');
-
+function Search({ searchValue, setSearchValue, translate }) {
+  
   console.log(searchValue);
 
   return (
@@ -47,9 +46,11 @@ function Search({ translate }) {
 }
 
 function List({ translate }) {
+  const [searchValue, setSearchValue] = useState('');
+
   return (
     <div className='w-full h-full flex flex-col'>
-      <Search translate={translate} />
+      <Search searchValue={searchValue} setSearchValue={setSearchValue} translate={translate} />
       <ScrollShadow className='w-full h-full px-6 py-4' />
     </div>
   );
