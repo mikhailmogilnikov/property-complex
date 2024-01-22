@@ -126,7 +126,7 @@ const Menu = observer(({ translate }) => {
       animate={visibility ? 'open' : 'closed'}
       variants={animationVariants}
       transition={transitions.menu.desktopVisibility}
-      className='absolute top-8 left-8 w-96 h-[calc(100dvh-4rem)] shadow-base bg-white/50 dark:bg-white/[0.08] backdrop-blur-xl rounded-4xl flex flex-col'
+      className='absolute top-8 left-8 w-96 h-[calc(100dvh-4rem)] shadow-base bg-white/60 dark:bg-white/[0.08] backdrop-blur-xl rounded-4xl flex flex-col'
     >
       <Header translate={translate} />
       <Content translate={translate} activeTab={activeTab} />
