@@ -4,6 +4,7 @@ import strings from '@/constants/strings';
 class MenuStore {
   constructor() {
     this.activeTab = strings.menu.states.list;
+    this.activeRoom = 0;
     this.visibility = true;
     makeAutoObservable(this);
 
@@ -16,6 +17,12 @@ class MenuStore {
     }
   }
 
+  setActiveRoom(room) {
+    if (room !== this.activeRoom) {
+      this.activeRoom = room;
+    }
+  }
+
   toggleVisibility(visibility = this.visibility) {
     runInAction(() => {
       this.visibility = !visibility;
@@ -24,6 +31,10 @@ class MenuStore {
 
   getActiveTab() {
     return this.activeTab;
+  }
+
+  getActiveRoom() {
+    return this.activeRoom;
   }
 
   getVisibility() {

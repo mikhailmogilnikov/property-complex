@@ -30,10 +30,10 @@ function Map() {
       text: isDark ? '#fff' : '#000',
       fill: isDark ? '#000' : '#fff',
       hover: {
-        fill: isDark ? 'rgba(255, 81, 3, 1)' : 'rgba(255, 81, 3, 0.8)',
+        fill: isDark ? 'rgba(255, 81, 3, 0.8)' : 'rgba(255, 81, 3, 0.8)',
       } ,
       mousedown: {
-        fill: isDark ? 'rgba(255, 81, 3, 0.8)' : 'rgba(255, 81, 3, 1)',
+        fill: isDark ? 'rgba(255, 81, 3, 1)' : 'rgba(255, 81, 3, 0.95)',
       }
     };
 

@@ -21,6 +21,10 @@ export default function translation() {
             placeholder: menu('content.list.search.placeholder'),
           },
         },
+        room: {
+          owner: menu('content.room.owner'),
+          items: menu('content.room.items'),
+        },
       },
     },
   };
