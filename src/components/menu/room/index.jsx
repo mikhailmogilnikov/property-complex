@@ -22,7 +22,7 @@ function Room({ translate }) {
 
   return (
     <div className='w-full h-full flex flex-col'>
-      <div className='w-hull h-60 bg-black/10 dark:bg-white/10 flex-none rounded-t-4xl' />
+      <div className='w-hull aspect-video bg-black/10 dark:bg-white/10 flex-none rounded-t-4xl' />
       <ScrollShadow className='flex flex-col gap-6 p-6'>
         <Text tag='h1' content={currentRoom.name} />
         <div className='flex flex-row flex-wrap gap-2'>
