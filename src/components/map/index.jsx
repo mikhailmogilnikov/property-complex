@@ -37,10 +37,28 @@ function Map() {
       }
     };
 
-    console.log({theme, resolvedTheme, isDark, colors});
-
     const svg = d3.select('svg');
     const g = svg.select('g');
+
+    svg
+      .attr("width", window.innerWidth)
+      .attr("height", window.innerHeight);
+
+
+    const manualTransform = d3
+      .zoomIdentity
+      .scale(.5)
+      .translate(500, 50);
+    g.attr('transform', manualTransform);
+
+
+    const zoomHandler = d3.zoom().on('zoom', (event) => {
+
+      g.attr('transform', event.transform);
+    });
+    svg.call(zoomHandler);
+    svg.call(zoomHandler.transform, manualTransform);
+    svg.on('dblclick.zoom', null);
 
     g.attr('text-anchor', 'middle')
       .attr('font-size', 20)
@@ -91,6 +109,16 @@ function Map() {
           .filter(item => item.roomId === room.id);
         
         console.log({room, roomItems});
+
+        // transferReportGeneration({
+        //   itemsList: databaseStore
+        //               .getItems()
+        //               .filter(item => item.roomId === room.id)
+        //               .map(item => item.name),
+        //   currentResponsible: room.owner,
+        //   newResponsible: null                    
+        // });
+
       })
       .on('mouseover', function () {
         getPathFill(this)
@@ -120,15 +148,18 @@ function Map() {
           .ease(d3.easeLinear)
           .attr('fill', colors.hover.fill);
       });
+
+    
+      
+
+      
   }, [svgContent, theme]);
 
   return (
     <div className='w-full h-[100dvh] cursor-grab'>
-      <div className='w-full ml-[38rem] mt-64'>
         {createElement('div', {
           dangerouslySetInnerHTML: { __html: svgContent },
         })}
-      </div>
     </div>
   );
 }
