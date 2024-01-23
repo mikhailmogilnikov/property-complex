@@ -8,6 +8,7 @@ import { createElement, useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import SvgImport from '@/utility/svgImport';
 import { useStore } from '@/store/store';
+import transferReportGeneration from '@/utility/transferReportGeneration';
 
 function Map() {
   const [svgContent, setSvgContent] = useState('');
@@ -87,6 +88,13 @@ function Map() {
           .filter(item => item.roomId === room.id);
         
         console.log({room, roomItems});
+
+        // transferReportGeneration({
+        //   itemsList: roomItems.map(item => item.name),
+        //   currentResponsible: room.owner,
+        //   newResponsible: null
+        // });
+
         // menuStore.setActiveTab(null);
       })
       .on('mouseover', function () {

@@ -48,7 +48,10 @@ function Search({ searchValue, setSearchValue, translate }) {
 function List({ translate }) {
   const { databaseStore } = useStore();
   const [searchValue, setSearchValue] = useState('');
-  // const [foundList, setFoundList] = useState([]);
+  
+
+  
+  // databaseStore.getItems().filter(item => item.roomId === room.id).lenght
 
   useEffect(() => {
     const roomList = databaseStore.getRooms();
