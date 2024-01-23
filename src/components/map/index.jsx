@@ -31,29 +31,21 @@ function Map() {
       fill: isDark ? '#000' : '#fff',
       hover: {
         fill: isDark ? 'rgba(255, 81, 3, 0.8)' : 'rgba(255, 81, 3, 0.8)',
-      } ,
+      },
       mousedown: {
         fill: isDark ? 'rgba(255, 81, 3, 1)' : 'rgba(255, 81, 3, 0.95)',
-      }
+      },
     };
 
     const svg = d3.select('svg');
     const g = svg.select('g');
 
-    svg
-      .attr("width", window.innerWidth)
-      .attr("height", window.innerHeight);
+    svg.attr('width', window.innerWidth).attr('height', window.innerHeight);
 
-
-    const manualTransform = d3
-      .zoomIdentity
-      .scale(.5)
-      .translate(500, 50);
+    const manualTransform = d3.zoomIdentity.scale(0.5).translate(500, 50);
     g.attr('transform', manualTransform);
 
-
     const zoomHandler = d3.zoom().on('zoom', (event) => {
-
       g.attr('transform', event.transform);
     });
     svg.call(zoomHandler);
@@ -69,8 +61,8 @@ function Map() {
     svg.selectAll('path[stroke]').attr('stroke', colors.stroke);
     svg.selectAll('path[fill]').attr('fill', colors.fill);
 
-    const roomNames = databaseStore.getRooms().map(i => i.name);
-    
+    const roomNames = databaseStore.getRooms().map((i) => i.name);
+
     const rooms = g.selectAll('g').filter(function () {
       return roomNames.includes(this.getAttribute('class'));
     });
@@ -102,13 +94,13 @@ function Map() {
       .on('click', function () {
         const room = databaseStore
           .getRooms()
-          .find(r => r.name === this.getAttribute('class'));
-        
+          .find((r) => r.name === this.getAttribute('class'));
+
         const roomItems = databaseStore
           .getItems()
-          .filter(item => item.roomId === room.id);
-        
-        console.log({room, roomItems});
+          .filter((item) => item.roomId === room.id);
+
+        console.log({ room, roomItems });
 
         menuStore.setActiveRoom(room.id);
         menuStore.setActiveTab('room');
@@ -119,9 +111,8 @@ function Map() {
         //               .filter(item => item.roomId === room.id)
         //               .map(item => item.name),
         //   currentResponsible: room.owner,
-        //   newResponsible: null                    
+        //   newResponsible: null
         // });
-
       })
       .on('mouseover', function () {
         getPathFill(this)
@@ -137,32 +128,27 @@ function Map() {
           .ease(d3.easeLinear)
           .attr('fill', colors.fill);
       })
-      .on('mousedown', function() {
+      .on('mousedown', function () {
         getPathFill(this)
           .transition()
           .duration(100)
           .ease(d3.easeLinear)
           .attr('fill', colors.mousedown.fill);
       })
-      .on('mouseup', function() {
+      .on('mouseup', function () {
         getPathFill(this)
           .transition()
           .duration(100)
           .ease(d3.easeLinear)
           .attr('fill', colors.hover.fill);
       });
-
-    
-      
-
-      
   }, [svgContent, theme]);
 
   return (
     <div className='w-full h-[100dvh] cursor-grab'>
-        {createElement('div', {
-          dangerouslySetInnerHTML: { __html: svgContent },
-        })}
+      {createElement('div', {
+        dangerouslySetInnerHTML: { __html: svgContent },
+      })}
     </div>
   );
 }

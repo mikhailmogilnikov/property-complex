@@ -7,7 +7,6 @@ import RoomItemsList from './items';
 import Chip from '@/components/primitives/Chip';
 import Injector from './Injector';
 
-
 const Room = observer(({ translate }) => {
   const { menuStore, databaseStore } = useStore();
 
