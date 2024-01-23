@@ -7,7 +7,7 @@ function RoomItemsList({ roomItems, groupSelected, setGroupSelected }) {
       <h4 className='font-medium text-sm px-1'>Предметы</h4>
       <CheckboxGroup
         classNames={{
-          base: 'bg-white/80 dark:bg-default/20 rounded-2xl flex flex-col gap-0 overflow-clip overflow-y-visible shadow-small dark:shadow-none',
+          base: 'bg-white/30 dark:bg-default/30 rounded-2xl flex flex-col gap-0 overflow-clip overflow-y-visible shadow-small dark:shadow-none',
           wrapper: 'gap-0',
         }}
         value={groupSelected}

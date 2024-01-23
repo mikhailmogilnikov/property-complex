@@ -9,16 +9,16 @@ function List({ translate }) {
   const [searchValue, setSearchValue] = useState('');
   const [foundList, setFoundList] = useState([]);
 
-  const countItems = () => {
-    const items = databaseStore.getItems();
+  // const countItems = () => {
+  //   const items = databaseStore.getItems();
 
-    return items.reduce((acc, item) => {
-      acc[item.roomId] = (acc[item.roomId] || 0) + 1;
-      return acc;
-    }, {});
-  };
+  //   return items.reduce((acc, item) => {
+  //     acc[item.roomId] = (acc[item.roomId] || 0) + 1;
+  //     return acc;
+  //   }, {});
+  // };
 
-  const itemsAmountInRooms = countItems();
+  // const itemsAmountInRooms = countItems();
 
   useEffect(() => {
     const roomList = databaseStore.getRooms();
@@ -52,7 +52,7 @@ function List({ translate }) {
         setSearchValue={setSearchValue}
         translate={translate}
       />
-      <ActualRooms foundList={foundList} itemsAmount={itemsAmountInRooms} />
+      <ActualRooms foundList={foundList} />
     </div>
   );
 }

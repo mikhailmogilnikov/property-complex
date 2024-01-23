@@ -10,6 +10,7 @@ export default function translation() {
           visible: menu('tooltip.visibility.visible'),
           hidden: menu('tooltip.visibility.hidden'),
         },
+        injectButton: menu('tooltip.injectButton'),
       },
       title: {
         name: menu('title.name'),

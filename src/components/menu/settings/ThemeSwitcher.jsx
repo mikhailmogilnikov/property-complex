@@ -29,7 +29,7 @@ function ThemeSwitcher() {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button className='w-full h-[8.2rem] relative flex justify-start items-start bg-white dark:bg-white/10 rounded-[32px] p-5 shadow-base'>
+        <Button className='w-full h-[8.2rem] relative flex justify-start items-start bg-white/30 dark:bg-default/30 rounded-[32px] p-5 shadow-base'>
           <Text tag='h4' content='Оформление' />
           <div className='absolute -bottom-4 -right-1 opacity-10'>
             {resolvedTheme === 'light' ? (

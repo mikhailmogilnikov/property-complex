@@ -104,6 +104,7 @@ function Map() {
 
         menuStore.setActiveRoom(room.id);
         menuStore.setActiveTab('room');
+        menuStore.toggleVisibility(false);
 
         // transferReportGeneration({
         //   itemsList: databaseStore

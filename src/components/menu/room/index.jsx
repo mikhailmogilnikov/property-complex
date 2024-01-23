@@ -9,6 +9,7 @@ import Injector from './Injector';
 
 const Room = observer(({ translate }) => {
   const { menuStore, databaseStore } = useStore();
+  const [groupSelected, setGroupSelected] = useState([]);
 
   const currentRoomId = menuStore.getActiveRoom();
   const rooms = databaseStore.getRooms();
@@ -19,12 +20,12 @@ const Room = observer(({ translate }) => {
     (item) => currentRoomId === item.roomId,
   );
 
-  const [groupSelected, setGroupSelected] = useState([]);
+  const isItemSelected = groupSelected.length > 0;
 
   return (
-    <div className='w-full h-full flex flex-col'>
-      <div className='w-hull aspect-video bg-black/10 dark:bg-white/10 flex-none rounded-t-4xl' />
-      <ScrollShadow className='flex flex-col gap-6 p-6'>
+    <div className='w-full h-full relative flex flex-col'>
+      <div className='w-hull aspect-video bg-black/10 dark:bg-default/20 flex-none rounded-t-4xl' />
+      <ScrollShadow className='h-full flex flex-col gap-6 p-6'>
         <Text tag='h1' content={currentRoom.name} />
         <div className='flex flex-row flex-wrap gap-2'>
           <Chip
@@ -42,7 +43,11 @@ const Room = observer(({ translate }) => {
           setGroupSelected={setGroupSelected}
         />
       </ScrollShadow>
-      {groupSelected.length > 0 && <Injector />}
+      <Injector
+        translate={translate}
+        isItemSelected={isItemSelected}
+        selectedItemsLength={groupSelected.length}
+      />
     </div>
   );
 });

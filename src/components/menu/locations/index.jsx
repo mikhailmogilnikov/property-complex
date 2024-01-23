@@ -20,7 +20,7 @@ function Location({ name }) {
       variant='flat'
       isDisabled={disabled}
       className={clsx(
-        'h-12 font-semibold bg-transparent dark:bg-white/10 rounded-2xl shadow-small flex',
+        'h-12 font-semibold bg-white/30 dark:bg-default/30 rounded-2xl shadow-small flex',
         { 'border-2 border-black dark:border-white': active },
       )}
     >
