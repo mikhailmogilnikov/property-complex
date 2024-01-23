@@ -25,7 +25,7 @@ export default {
     nav: {
       list: <PiListMagnifyingGlassBold className='w-full h-full' />,
       locations: <TbMap2 className='w-full h-full' />,
-      menu: <PiUserCircleBold className='w-full h-7' />,
+      profile: <PiUserCircleBold className='w-full h-7' />,
     },
   },
 };

@@ -32,7 +32,6 @@ function Location({ name }) {
 function Locations() {
   return (
     <div className='flex flex-col gap-4'>
-      {/* <h2 className='text-3xl font-semibold px-6 mb-2'>Локации</h2> */}
       <div className='grid grid-cols-2 gap-4 px-6 py-2'>
         {locs.map((loc) => (
           <Location key={`id-${loc}`} name={loc} />

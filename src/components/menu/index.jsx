@@ -4,8 +4,6 @@ import { Tooltip } from '@nextui-org/tooltip';
 import clsx from 'clsx';
 import { observer } from 'mobx-react-lite';
 import { motion } from 'framer-motion';
-import { useTheme } from 'next-themes';
-import { useEffect } from 'react';
 import icons from '@/constants/icons';
 import MgriLogo from '../../assets/MgriLogo';
 import Chip from '../primitives/Chip';
@@ -13,6 +11,7 @@ import { useStore } from '@/store/store';
 import strings from '@/constants/strings';
 import Content from './content';
 import transitions from '@/constants/transitions';
+import changeMenuTheme from '@/utility/changeThemeColor';
 
 export const checkActiveTab = (tab, currentActiveTab) =>
   tab === currentActiveTab;
@@ -61,7 +60,7 @@ function Navigation({ activeTab, setActiveTab }) {
     <div className='h-16 flex flex-row flex-shrink-0'>
       <NavButton name={strings.menu.states.list} />
       <NavButton name={strings.menu.states.locations} />
-      <NavButton name={strings.menu.states.menu} />
+      <NavButton name={strings.menu.states.profile} />
     </div>
   );
 }
@@ -92,7 +91,7 @@ function Hider({ visibility, translate, toggleVisibility }) {
       placement='right'
       offset={0}
       classNames={{
-        base: 'font-medium'
+        base: 'font-medium',
       }}
       content={translate.menu.tooltip.visibility[status]}
     >
@@ -109,43 +108,33 @@ function Hider({ visibility, translate, toggleVisibility }) {
 }
 
 const Menu = observer(({ translate }) => {
+  changeMenuTheme();
+
   const { menuStore } = useStore();
 
   const activeTab = menuStore.getActiveTab();
+
   const setActiveTab = (tab) => menuStore.setActiveTab(tab);
+  const setActiveRoom = (roomId) => menuStore.setActiveRoom(roomId);
 
   const visibility = menuStore.getVisibility();
-
-  const animationVariants = {
-    initial: { opacity: 0, x: '-110%', scale: 0.2 },
-    open: { opacity: 1, x: 0, scale: 1 },
-    closed: { opacity: 1, x: '-110%', scale: 1 },
-  };
-
-  const { resolvedTheme } = useTheme();
-
-  useEffect(() => {
-    if (resolvedTheme === 'dark') {
-      document
-        .querySelector('meta[name="theme-color"]')
-        .setAttribute('content', '#000000');
-    } else {
-      document
-        .querySelector('meta[name="theme-color"]')
-        .setAttribute('content', '#ffffff');
-    }
-  }, [resolvedTheme]);
 
   return (
     <motion.aside
       initial='initial'
       animate={visibility ? 'open' : 'closed'}
-      variants={animationVariants}
+      variants={transitions.menu.animationVariants}
       transition={transitions.menu.desktopVisibility}
       className='absolute top-8 left-8 w-96 h-[calc(100dvh-4rem)] shadow-base bg-white/60 dark:bg-white/[0.08] backdrop-blur-xl rounded-4xl flex flex-col'
     >
-      <Header translate={translate} />
-      <Content translate={translate} activeTab={activeTab} />
+      {activeTab !== strings.menu.states.room && (
+        <Header translate={translate} />
+      )}
+      <Content
+        translate={translate}
+        activeTab={activeTab}
+        setActiveRoom={setActiveRoom}
+      />
       <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
       <CurrentLocationChip
         toggleVisibility={menuStore.toggleVisibility}

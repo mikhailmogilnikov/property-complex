@@ -3,7 +3,8 @@ export default {
     states: {
       list: 'list',
       locations: 'locations',
-      menu: 'menu',
+      profile: 'profile',
+      room: 'room',
     }
   }
 }
