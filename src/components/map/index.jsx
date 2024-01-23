@@ -8,7 +8,7 @@ import { createElement, useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import SvgImport from '@/utility/svgImport';
 import { useStore } from '@/store/store';
-import transferReportGeneration from '@/utility/transferReportGeneration';
+// import transferReportGeneration from '@/utility/transferReportGeneration';
 
 function Map() {
   const [svgContent, setSvgContent] = useState('');
@@ -31,7 +31,10 @@ function Map() {
       fill: isDark ? '#000' : '#fff',
       hover: {
         fill: isDark ? 'rgba(255, 81, 3, 1)' : 'rgba(255, 81, 3, 0.8)',
-      } 
+      } ,
+      mousedown: {
+        fill: isDark ? 'rgba(255, 81, 3, 0.8)' : 'rgba(255, 81, 3, 1)',
+      }
     };
 
     console.log({theme, resolvedTheme, isDark, colors});
@@ -88,14 +91,6 @@ function Map() {
           .filter(item => item.roomId === room.id);
         
         console.log({room, roomItems});
-
-        // transferReportGeneration({
-        //   itemsList: roomItems.map(item => item.name),
-        //   currentResponsible: room.owner,
-        //   newResponsible: null
-        // });
-
-        // menuStore.setActiveTab(null);
       })
       .on('mouseover', function () {
         getPathFill(this)
@@ -110,6 +105,20 @@ function Map() {
           .duration(100)
           .ease(d3.easeLinear)
           .attr('fill', colors.fill);
+      })
+      .on('mousedown', function() {
+        getPathFill(this)
+          .transition()
+          .duration(100)
+          .ease(d3.easeLinear)
+          .attr('fill', colors.mousedown.fill);
+      })
+      .on('mouseup', function() {
+        getPathFill(this)
+          .transition()
+          .duration(100)
+          .ease(d3.easeLinear)
+          .attr('fill', colors.hover.fill);
       });
   }, [svgContent, theme]);
 
