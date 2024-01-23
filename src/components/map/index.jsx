@@ -14,7 +14,7 @@ function Map() {
   const [svgContent, setSvgContent] = useState('');
 
   const { theme, resolvedTheme } = useTheme();
-  const { databaseStore } = useStore();
+  const { databaseStore, menuStore } = useStore();
 
   useEffect(() => {
     SvgImport('/locations/4th-floor.svg').then((data) => setSvgContent(data));
@@ -109,6 +109,9 @@ function Map() {
           .filter(item => item.roomId === room.id);
         
         console.log({room, roomItems});
+
+        menuStore.setActiveRoom(room.id);
+        menuStore.setActiveTab('room');
 
         // transferReportGeneration({
         //   itemsList: databaseStore
