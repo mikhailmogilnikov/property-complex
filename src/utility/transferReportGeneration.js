@@ -3,11 +3,24 @@ const transferReportGeneration = ({itemsList, currentResponsible, newResponsible
     const isNew = newResponsible !== null;
     console.log(itemsList, date);
 
+
+    const currentResponsibleText = isNew 
+        ?
+        `Текущий материально ответственный: ${currentResponsible}`
+        :
+        `Материально ответственный: ${currentResponsible}`;
+    
+    const newResponsibleText = isNew 
+        ?
+        `Новый материально ответственный: ${currentResponsible}`
+        :
+        '';
+
     const reportContent = 
 `# Отчет о переносе предметов
 Дата: ${date}
-Материально ответственный ${isNew ? "(текущий)" : ''}: ${currentResponsible}
-${isNew ? `Материально ответственный (новый): ${newResponsible}\n` : ''}
+${currentResponsibleText}
+${newResponsibleText}
 ## Список перенесенных предметов
 ${itemsList.map((item, index) => `- ${index + 1}. ${item}`).join('\n')}`;
 

@@ -8,7 +8,9 @@ export default function Providers({ children }) {
   return (
     <NextUIProvider>
       <ThemeProvider attribute='class' defaultTheme='dark'>
-        <StoreProvider>{children}</StoreProvider>
+        <StoreProvider>
+          {children}  
+        </StoreProvider>
       </ThemeProvider>
     </NextUIProvider>
   );

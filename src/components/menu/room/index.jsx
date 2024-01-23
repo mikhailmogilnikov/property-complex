@@ -1,12 +1,14 @@
 import { ScrollShadow } from '@nextui-org/scroll-shadow';
 import { useState } from 'react';
+import { observer } from 'mobx-react-lite';
 import { useStore } from '@/store/store';
 import Text from '@/components/primitives/Text';
 import RoomItemsList from './items';
 import Chip from '@/components/primitives/Chip';
 import Injector from './Injector';
 
-function Room({ translate }) {
+
+const Room = observer(({ translate }) => {
   const { menuStore, databaseStore } = useStore();
 
   const currentRoomId = menuStore.getActiveRoom();
@@ -44,6 +46,6 @@ function Room({ translate }) {
       {groupSelected.length > 0 && <Injector />}
     </div>
   );
-}
+});
 
 export default Room;
