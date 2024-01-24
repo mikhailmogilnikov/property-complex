@@ -21,7 +21,10 @@
         "owner": "Мат. ответственный",
         "items": "Предметы",
         "modal": {
-          "removeItem": "Убрать предмет из списка"
+          "selectedItems": "Выбранные предметы",
+          "removeItem": "Убрать предмет из списка",
+          "roomPickerTitle": "Выбор локации",
+          "navigatorTitle": "Выбор помещения"
         }
       }
     }

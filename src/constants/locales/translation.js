@@ -26,7 +26,10 @@ export default function translation() {
           owner: menu('content.room.owner'),
           items: menu('content.room.items'),
           modal: {
+            selectedItems: menu('content.room.modal.selectedItems'),
             removeItem: menu('content.room.modal.removeItem'),
+            roomPickerTitle: menu('content.room.modal.roomPickerTitle'),
+            navigatorTitle: menu('content.room.modal.navigatorTitle'),
           },
         },
       },
