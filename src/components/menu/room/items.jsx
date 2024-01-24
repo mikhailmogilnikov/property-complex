@@ -1,10 +1,19 @@
 import { CheckboxGroup, Checkbox } from '@nextui-org/checkbox';
+import { Popover, PopoverTrigger, PopoverContent } from '@nextui-org/popover';
 import Breaker from '@/components/primitives/Breaker';
+import Text from '@/components/primitives/Text';
 
-function RoomItemsList({ translate, roomItems, groupSelected, setGroupSelected }) {
+function RoomItemsList({
+  translate,
+  roomItems,
+  groupSelected,
+  setGroupSelected,
+}) {
   return (
     <div className='w-full flex flex-col gap-3 mt-4'>
-      <h4 className='font-medium text-sm px-1'>{translate.menu.content.room.items}</h4>
+      <h4 className='font-medium text-sm px-1'>
+        {translate.menu.content.room.items}
+      </h4>
       <CheckboxGroup
         classNames={{
           base: 'bg-white/30 dark:bg-default/30 rounded-2xl flex flex-col gap-0 overflow-clip overflow-y-visible shadow-small dark:shadow-none',
@@ -23,11 +32,35 @@ function RoomItemsList({ translate, roomItems, groupSelected, setGroupSelected }
                 icon: 'text-orange-200',
               }}
             >
-              <div className='flex flex-col gap-1 w-full '>
+              <div className='flex flex-col gap-3 w-full '>
                 <h6 className='w-full text-start text-sm font-normal'>
                   {item.name}
                 </h6>
-                <div className='opacity-60 flex flex-col gap-1' />
+                <Popover backdrop='blur' placement='right'>
+                  <PopoverTrigger>
+                    <button
+                      className='w-min h-min outline-none'
+                      aria-label='open popover'
+                      type='button'
+                    >
+                      <Text
+                        tag='p'
+                        className='opacity-50 underline'
+                        content='Подробнее'
+                      />
+                    </button>
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    <div className='px-1 py-2'>
+                      <div className='text-small font-bold'>
+                        Popover Content
+                      </div>
+                      <div className='text-tiny'>
+                        This is the popover content
+                      </div>
+                    </div>
+                  </PopoverContent>
+                </Popover>
               </div>
             </Checkbox>
             {itemIndex < roomItems.length - 1 && <Breaker />}

@@ -1,6 +1,7 @@
 import { ScrollShadow } from '@nextui-org/scroll-shadow';
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import Image from 'next/image';
 import { useStore } from '@/store/store';
 import Text from '@/components/primitives/Text';
 import RoomItemsList from './items';
@@ -27,12 +28,19 @@ const Room = observer(({ translate }) => {
   const isItemSelected = groupSelected.length > 0;
 
   return (
-    <div className='w-full h-full flex flex-col relative'>
+    <div className='w-full h-full flex flex-col overflow-hidden relative'>
       <ScrollShadow
         hideScrollBar
-        className='w-full h-full flex flex-col flex-shrink'
+        className='w-full h-full flex flex-col flex-shrink rounded-t-4xl'
       >
-        <div className='w-hull aspect-video bg-black/10 dark:bg-default/20 flex-none rounded-t-4xl' />
+        <div className='w-hull aspect-video bg-black/10 overflow-hidden dark:bg-default/20 flex-none rounded-t-4xl'>
+          <Image
+            src={`/images/4th-floor/${currentRoom.name}.jpg`}
+            width={384}
+            height={216}
+            alt={currentRoom.name}
+          />
+        </div>
         <div className='h-full flex flex-col gap-6 p-6'>
           <Text tag='h1' content={currentRoom.name} />
           <div className='flex flex-row flex-wrap gap-2'>
