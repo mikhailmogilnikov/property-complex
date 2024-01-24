@@ -76,6 +76,7 @@ function CurrentLocationChip({ toggleVisibility, setActiveTab }) {
       <Chip
         push={chipPush}
         content='Этаж 4'
+        bgColor='bg-white/60 dark:bg-default-50/80'
         title={icons.menu.header.location}
         isIcon
       />
