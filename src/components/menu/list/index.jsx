@@ -9,17 +9,6 @@ function List({ translate }) {
   const [searchValue, setSearchValue] = useState('');
   const [foundList, setFoundList] = useState([]);
 
-  // const countItems = () => {
-  //   const items = databaseStore.getItems();
-
-  //   return items.reduce((acc, item) => {
-  //     acc[item.roomId] = (acc[item.roomId] || 0) + 1;
-  //     return acc;
-  //   }, {});
-  // };
-
-  // const itemsAmountInRooms = countItems();
-
   useEffect(() => {
     const roomList = databaseStore.getRooms();
     const itemList = databaseStore.getItems();

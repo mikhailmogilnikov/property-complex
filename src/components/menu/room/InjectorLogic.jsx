@@ -1,6 +1,11 @@
 import { Button } from '@nextui-org/button';
 import { Tooltip } from '@nextui-org/tooltip';
-import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@nextui-org/react";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+} from '@nextui-org/react';
 import { useMemo, useState } from 'react';
 import Breaker from '@/components/primitives/Breaker';
 import Text from '@/components/primitives/Text';
@@ -48,18 +53,21 @@ function SelectedItems({
   );
 }
 
-
 function LocationPicker({ translate, locations, currentLocationId }) {
   const locs = useMemo(() => locations.map((loc) => loc.name), [locations]);
-  const initLoc = useMemo(() => locations.find((loc) => loc.id === currentLocationId)?.name, [locs, currentLocationId]);
-
-  const [selectedKeys, setSelectedKeys] = useState(new Set(initLoc ? [initLoc] : []));
-
-  const selectedValue = useMemo(
-    () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
-    [selectedKeys]
+  const initLoc = useMemo(
+    () => locations.find((loc) => loc.id === currentLocationId)?.name,
+    [locs, currentLocationId],
   );
 
+  const [selectedKeys, setSelectedKeys] = useState(
+    new Set(initLoc ? [initLoc] : []),
+  );
+
+  const selectedValue = useMemo(
+    () => Array.from(selectedKeys).join(', ').replaceAll('_', ' '),
+    [selectedKeys],
+  );
 
   return (
     <div className='flex flex-col gap-3'>
@@ -70,24 +78,28 @@ function LocationPicker({ translate, locations, currentLocationId }) {
       />
       <Dropdown className='w-full'>
         <DropdownTrigger>
-          <Button 
-            variant="bordered" 
-            className="capitalize"
-          >
-            {selectedValue}
+          <Button variant='flat' className='h-14 rounded-2xl'>
+            <div className='flex w-full justify-between px-1'>
+              <Text tag='h4' content={selectedValue} />
+              <div className='flex w-5 h-5'>
+                {icons.menu.content.list.caret}
+              </div>
+            </div>
           </Button>
         </DropdownTrigger>
-        <DropdownMenu 
-          aria-label="Single selection example"
-          variant="flat"
+        <DropdownMenu
+          aria-label='Single selection'
+          variant='flat'
           disallowEmptySelection
-          selectionMode="single"
+          selectionMode='single'
           selectedKeys={selectedKeys}
           onSelectionChange={setSelectedKeys}
         >
-          {locs.map((loc) => 
-            <DropdownItem key={loc}>{loc}</DropdownItem>
-          )}
+          {locs.map((loc) => (
+            <DropdownItem key={loc}>
+              <Text tag='h5' content={loc} />
+            </DropdownItem>
+          ))}
         </DropdownMenu>
       </Dropdown>
     </div>
@@ -112,17 +124,21 @@ function InjectorLogic({
   selectedItemsList,
   unpinItem,
   locations,
-  currentLocationId
+  currentLocationId,
 }) {
   return (
-    <div className='flex flex-col gap-6'>
+    <div className='flex flex-col gap-10'>
       <SelectedItems
         translate={translate}
         selectedItemsList={selectedItemsList}
         selectedItemsIds={selectedItemsIds}
         unpinItem={unpinItem}
       />
-      <LocationPicker translate={translate} locations={locations} currentLocationId={currentLocationId}/>
+      <LocationPicker
+        translate={translate}
+        locations={locations}
+        currentLocationId={currentLocationId}
+      />
       <RoomsNavigator translate={translate} />
     </div>
   );
