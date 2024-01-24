@@ -16,14 +16,18 @@ const Room = observer(({ translate }) => {
     setGroupSelected([]);
   }, [menuStore.getActiveRoom()]);
 
-  const currentRoomId = menuStore.getActiveRoom();
+  
+  const locations = databaseStore.getLocations();
   const rooms = databaseStore.getRooms();
   const items = databaseStore.getItems();
+  const currentRoomId = menuStore.getActiveRoom();
 
   const currentRoom = rooms.find((room) => currentRoomId === room.id);
   const currentRoomItems = items.filter(
     (item) => currentRoomId === item.roomId,
   );
+
+  const currentLocationId = currentRoom.locationId;
 
   const selectedItemsList = groupSelected.map((id) =>
     items.find((item) => id === item.id),
@@ -92,6 +96,8 @@ const Room = observer(({ translate }) => {
         selectedItemsList={selectedItemsList}
         unpinItem={unpinItem}
         moveItems={moveItems}
+        locations={locations}
+        currentLocationId={currentLocationId}
       />
     </div>
   );

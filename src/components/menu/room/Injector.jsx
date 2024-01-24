@@ -9,10 +9,11 @@ import {
   useDisclosure,
 } from '@nextui-org/modal';
 
+import { useEffect } from 'react';
 import InjectorLogic from './InjectorLogic';
-// import { useStore } from '@/store/store';
 
-function InjectModal({ translate, isOpen, onOpenChange, selectedItems, selectedItemsList, unpinItem, moveItems }) {
+
+function InjectModal({ translate, isOpen, onOpenChange, selectedItems, selectedItemsList, unpinItem, moveItems, locations, currentLocationId }) {
 
   return (
     <Modal backdrop='blur' isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -28,6 +29,8 @@ function InjectModal({ translate, isOpen, onOpenChange, selectedItems, selectedI
                 selectedItemsIds={selectedItems}
                 selectedItemsList={selectedItemsList}
                 unpinItem={unpinItem}
+                locations={locations}
+                currentLocationId={currentLocationId}
               />
             </ModalBody>
             <ModalFooter>
@@ -45,8 +48,12 @@ function InjectModal({ translate, isOpen, onOpenChange, selectedItems, selectedI
   );
 }
 
-function Injector({ translate, isItemSelected, selectedItems, selectedItemsList, unpinItem, moveItems }) {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+function Injector({ translate, isItemSelected, selectedItems, selectedItemsList, unpinItem, moveItems, locations, currentLocationId }) {
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+
+  useEffect(() => {
+    if(isOpen) onClose();
+  }, [isItemSelected]);
 
   return (
     <AnimatePresence>
@@ -74,6 +81,8 @@ function Injector({ translate, isItemSelected, selectedItems, selectedItemsList,
             selectedItemsList={selectedItemsList}
             unpinItem={unpinItem}
             moveItems={moveItems}
+            locations={locations}
+            currentLocationId={currentLocationId}
           />
         </motion.div>
       )}
