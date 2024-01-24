@@ -27,8 +27,9 @@ export default function translation() {
           items: menu('content.room.items'),
           popover: {
             placeholder: menu('content.room.popover.placeholder'),
+            inventoryNumber: menu('content.room.popover.inventoryNumber'),
             cost: menu('content.room.popover.cost'),
-            lifetime: menu('content.room.popover.lifetime')
+            lifetime: menu('content.room.popover.lifetime'),
           },
           modal: {
             selectedItems: menu('content.room.modal.selectedItems'),

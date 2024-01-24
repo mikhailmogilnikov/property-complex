@@ -27,7 +27,7 @@ function RoomItemsList({
             <Checkbox
               value={item.id}
               classNames={{
-                base: 'w-full max-w-full h-min flex-row-reverse flex-none gap-2 items-center text-start px-4 py-3 hover:bg-black/5 hover:dark:bg-white/5 active:bg-black/10 active:dark:bg-white/10 transition-colors m-0',
+                base: 'w-full max-w-full h-min flex-row-reverse flex-none gap-4 items-center text-start px-4 py-3 hover:bg-black/5 hover:dark:bg-white/5 active:bg-black/10 active:dark:bg-white/10 transition-colors m-0',
                 label: 'w-full',
                 icon: 'text-orange-200',
               }}
@@ -46,20 +46,28 @@ function RoomItemsList({
                       <Text
                         tag='p'
                         className='opacity-50 underline'
-                        content={translate.menu.content.room.popover.placeholder}
+                        content={
+                          translate.menu.content.room.popover.placeholder
+                        }
                       />
                     </button>
                   </PopoverTrigger>
-                  <PopoverContent>
-                    <div className='px-1 py-2'>
-                      <div className='text-small font-bold'>
-                        {item.name}
-                      </div>
-                      <div className='text-tiny'>
-                        {`${translate.menu.content.room.popover.cost}: ${item.cost}`}
-                      </div>
-                      <div className='text-tiny'>
-                        {`${translate.menu.content.room.popover.lifetime}: ${item.lifetime}`}
+                  <PopoverContent className='max-w-80'>
+                    <div className='px-1 py-2 flex flex-col gap-4'>
+                      <div className='text-small font-bold'>{item.name}</div>
+                      <div className='flex flex-col opacity-60'>
+                        <Text
+                          tag='h5'
+                          content={`${translate.menu.content.room.popover.inventoryNumber}: ${item.id}`}
+                        />
+                        <Text
+                          tag='h5'
+                          content={`${translate.menu.content.room.popover.lifetime}: ${item.lifetime}`}
+                        />
+                        <Text
+                          tag='h5'
+                          content={`${translate.menu.content.room.popover.cost}: ${item.cost}`}
+                        />
                       </div>
                     </div>
                   </PopoverContent>

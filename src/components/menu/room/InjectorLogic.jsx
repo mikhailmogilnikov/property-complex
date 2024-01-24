@@ -20,7 +20,7 @@ function SelectedItems({
       <div className='bg-white/30 dark:bg-default/30 rounded-2xl flex flex-col gap-0 overflow-clip overflow-y-visible shadow-small dark:shadow-none'>
         {selectedItemsList.map((item, itemIndex) => (
           <div key={`pin_${item.id}`}>
-            <div className='h-min flex flex-row flex-none items-center text-start px-5 py-4'>
+            <div className='h-min flex flex-row flex-none items-center text-start px-5 py-4 gap-4'>
               <div className='flex gap-1 w-full items-center'>
                 <Text tag='h5' content={item.name} />
               </div>
