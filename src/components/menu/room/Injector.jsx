@@ -8,9 +8,12 @@ import {
   ModalFooter,
   useDisclosure,
 } from '@nextui-org/modal';
-import InjectorLogic from './InjectorLogic';
 
-function InjectModal({ translate, isOpen, onOpenChange, selectedItems }) {
+import InjectorLogic from './InjectorLogic';
+// import { useStore } from '@/store/store';
+
+function InjectModal({ translate, isOpen, onOpenChange, selectedItems, selectedItemsList, unpinItem, moveItems }) {
+
   return (
     <Modal backdrop='blur' isOpen={isOpen} onOpenChange={onOpenChange}>
       <ModalContent>
@@ -23,13 +26,15 @@ function InjectModal({ translate, isOpen, onOpenChange, selectedItems }) {
               <InjectorLogic
                 translate={translate}
                 selectedItemsIds={selectedItems}
+                selectedItemsList={selectedItemsList}
+                unpinItem={unpinItem}
               />
             </ModalBody>
             <ModalFooter>
               <Button color='danger' variant='light' onPress={onClose}>
                 Close
               </Button>
-              <Button color='primary' onPress={onClose}>
+              <Button color='primary' onPress={onClose} onClick={moveItems}>
                 Action
               </Button>
             </ModalFooter>
@@ -40,7 +45,7 @@ function InjectModal({ translate, isOpen, onOpenChange, selectedItems }) {
   );
 }
 
-function Injector({ translate, isItemSelected, selectedItems }) {
+function Injector({ translate, isItemSelected, selectedItems, selectedItemsList, unpinItem, moveItems }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
@@ -66,6 +71,9 @@ function Injector({ translate, isItemSelected, selectedItems }) {
             isOpen={isOpen}
             onOpenChange={onOpenChange}
             selectedItems={selectedItems}
+            selectedItemsList={selectedItemsList}
+            unpinItem={unpinItem}
+            moveItems={moveItems}
           />
         </motion.div>
       )}
