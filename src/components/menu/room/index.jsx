@@ -46,9 +46,6 @@ const Room = observer(({ translate }) => {
 
     databaseStore.setItems(newItemsState);
     setGroupSelected([]);
-
-
-    console.log(newItemsState);
   }  
 
   const isItemSelected = groupSelected.length > 0;
