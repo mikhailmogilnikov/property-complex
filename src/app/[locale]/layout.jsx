@@ -16,7 +16,7 @@ export default function RootLayout({ children, params: {locale} }) {
       <head>
         <Head />
       </head>
-      <body className={`${inter.className} select-none overflow-x-hidden`}>
+      <body className={`${inter.className} select-none overflow-hidden cursor-default`}>
         <Providers>{children}</Providers>
       </body>
     </html>

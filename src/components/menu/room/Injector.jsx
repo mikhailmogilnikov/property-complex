@@ -12,18 +12,32 @@ import {
 import { useEffect } from 'react';
 import InjectorLogic from './InjectorLogic';
 
-
-function InjectModal({ translate, isOpen, onOpenChange, selectedItems, selectedItemsList, unpinItem, moveItems, locations, currentLocationId }) {
-
+function InjectModal({
+  translate,
+  isOpen,
+  onOpenChange,
+  selectedItems,
+  selectedItemsList,
+  unpinItem,
+  moveItems,
+  locations,
+  currentLocationId,
+}) {
   return (
-    <Modal backdrop='blur' isOpen={isOpen} onOpenChange={onOpenChange}>
+    <Modal
+      scrollBehavior='inside'
+      backdrop='blur'
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      classNames={{ wrapper: 'overflow-hidden' }}
+    >
       <ModalContent>
         {(onClose) => (
           <>
             <ModalHeader className='flex flex-col gap-1'>
               {translate.menu.tooltip.injectButton}
             </ModalHeader>
-            <ModalBody>
+            <ModalBody className='p-0'>
               <InjectorLogic
                 translate={translate}
                 selectedItemsIds={selectedItems}
@@ -48,11 +62,20 @@ function InjectModal({ translate, isOpen, onOpenChange, selectedItems, selectedI
   );
 }
 
-function Injector({ translate, isItemSelected, selectedItems, selectedItemsList, unpinItem, moveItems, locations, currentLocationId }) {
+function Injector({
+  translate,
+  isItemSelected,
+  selectedItems,
+  selectedItemsList,
+  unpinItem,
+  moveItems,
+  locations,
+  currentLocationId,
+}) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
   useEffect(() => {
-    if(isOpen) onClose();
+    if (isOpen) onClose();
   }, [isItemSelected]);
 
   return (

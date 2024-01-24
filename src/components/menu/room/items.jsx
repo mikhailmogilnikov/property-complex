@@ -1,7 +1,6 @@
 import { CheckboxGroup, Checkbox } from '@nextui-org/checkbox';
-import { Popover, PopoverTrigger, PopoverContent } from '@nextui-org/popover';
 import Breaker from '@/components/primitives/Breaker';
-import Text from '@/components/primitives/Text';
+import ItemInfoPopover from './ItemInfoPopover';
 
 function RoomItemsList({
   translate,
@@ -36,42 +35,7 @@ function RoomItemsList({
                 <h6 className='w-full text-start text-sm font-normal'>
                   {item.name}
                 </h6>
-                <Popover backdrop='blur' placement='right'>
-                  <PopoverTrigger>
-                    <button
-                      className='w-min h-min outline-none'
-                      aria-label='open popover'
-                      type='button'
-                    >
-                      <Text
-                        tag='p'
-                        className='opacity-50 underline'
-                        content={
-                          translate.menu.content.room.popover.placeholder
-                        }
-                      />
-                    </button>
-                  </PopoverTrigger>
-                  <PopoverContent className='max-w-80'>
-                    <div className='px-1 py-2 flex flex-col gap-4'>
-                      <div className='text-small font-bold'>{item.name}</div>
-                      <div className='flex flex-col opacity-60'>
-                        <Text
-                          tag='h5'
-                          content={`${translate.menu.content.room.popover.inventoryNumber}: ${item.id}`}
-                        />
-                        <Text
-                          tag='h5'
-                          content={`${translate.menu.content.room.popover.lifetime}: ${item.lifetime}`}
-                        />
-                        <Text
-                          tag='h5'
-                          content={`${translate.menu.content.room.popover.cost}: ${item.cost}`}
-                        />
-                      </div>
-                    </div>
-                  </PopoverContent>
-                </Popover>
+                <ItemInfoPopover translate={translate} item={item} />
               </div>
             </Checkbox>
             {itemIndex < roomItems.length - 1 && <Breaker />}

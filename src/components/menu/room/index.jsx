@@ -16,7 +16,6 @@ const Room = observer(({ translate }) => {
     setGroupSelected([]);
   }, [menuStore.getActiveRoom()]);
 
-  
   const locations = databaseStore.getLocations();
   const rooms = databaseStore.getRooms();
   const items = databaseStore.getItems();
@@ -34,23 +33,21 @@ const Room = observer(({ translate }) => {
   );
 
   const unpinItem = (itemId) => {
-    setGroupSelected((prev) => prev.filter(prevId => prevId !== itemId));
-  }
+    setGroupSelected((prev) => prev.filter((prevId) => prevId !== itemId));
+  };
 
   const moveItems = () => {
     const endpointRoomId = 3;
 
-    const newItemsState = items.map((item) => 
-      (
-        groupSelected.includes(item.id)
-          ? {...item, roomId: endpointRoomId}
-          : item
-      )
+    const newItemsState = items.map((item) =>
+      groupSelected.includes(item.id)
+        ? { ...item, roomId: endpointRoomId }
+        : item,
     );
 
     databaseStore.setItems(newItemsState);
     setGroupSelected([]);
-  }  
+  };
 
   const isItemSelected = groupSelected.length > 0;
 
@@ -60,7 +57,7 @@ const Room = observer(({ translate }) => {
         hideScrollBar
         className='w-full h-full flex flex-col flex-shrink rounded-t-4xl'
       >
-        <div className='w-hull aspect-video bg-black/10 overflow-hidden dark:bg-default/20 flex-none rounded-t-4xl'>
+        <div className='w-hull aspect-video w-auto h-auto bg-black/10 overflow-hidden dark:bg-default/20 flex-none rounded-t-4xl'>
           <Image
             src={`/images/4th-floor/${currentRoom.name}.jpg`}
             width={384}

@@ -5,11 +5,13 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-} from '@nextui-org/react';
+} from '@nextui-org/dropdown';
 import { useMemo, useState } from 'react';
+import { ScrollShadow } from '@nextui-org/scroll-shadow';
 import Breaker from '@/components/primitives/Breaker';
 import Text from '@/components/primitives/Text';
 import icons from '@/constants/icons';
+import ItemInfoPopover from './ItemInfoPopover';
 
 function SelectedItems({
   translate,
@@ -28,8 +30,9 @@ function SelectedItems({
         {selectedItemsList.map((item, itemIndex) => (
           <div key={`pin_${item.id}`}>
             <div className='h-min flex flex-row flex-none items-center text-start px-5 py-4 gap-4'>
-              <div className='flex gap-1 w-full items-center'>
-                <Text tag='h5' content={item.name} />
+              <div className='flex flex-col gap-3 w-full items-start'>
+                <Text tag='h5' className='select-text cursor-auto' content={item.name} />
+                <ItemInfoPopover translate={translate} item={item} />
               </div>
 
               <Tooltip content={translate.menu.content.room.modal.removeItem}>
@@ -76,7 +79,7 @@ function LocationPicker({ translate, locations, currentLocationId }) {
         className='opacity-60'
         content={translate.menu.content.room.modal.roomPickerTitle}
       />
-      <Dropdown className='w-full'>
+      <Dropdown backdrop='opaque' className='w-full'>
         <DropdownTrigger>
           <Button variant='flat' className='h-14 rounded-2xl'>
             <div className='flex w-full justify-between px-1'>
@@ -127,7 +130,7 @@ function InjectorLogic({
   currentLocationId,
 }) {
   return (
-    <div className='flex flex-col gap-10'>
+    <ScrollShadow className='flex flex-col gap-10 px-5 py-3'>
       <SelectedItems
         translate={translate}
         selectedItemsList={selectedItemsList}
@@ -140,7 +143,7 @@ function InjectorLogic({
         currentLocationId={currentLocationId}
       />
       <RoomsNavigator translate={translate} />
-    </div>
+    </ScrollShadow>
   );
 }
 
