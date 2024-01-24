@@ -6,7 +6,8 @@ import {
   PiCaretRightBold,
   PiKeyBold,
   PiPackageBold,
-  PiArrowFatLineRightBold,
+ 
+  PiMinusBold,
 } from 'react-icons/pi';
 import { TbMap2 } from 'react-icons/tb';
 
@@ -23,7 +24,9 @@ export default {
         items: <PiPackageBold className='w-full h-full' />,
       },
       room: {
-        process: <PiArrowFatLineRightBold className='w-5 h-5' />,
+        modal: {
+          minus: <PiMinusBold className='w-5 h-5' />,
+        },
       },
     },
     nav: {

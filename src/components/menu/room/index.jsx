@@ -23,30 +23,37 @@ const Room = observer(({ translate }) => {
   const isItemSelected = groupSelected.length > 0;
 
   return (
-    <div className='w-full h-full relative flex flex-col'>
-      <div className='w-hull aspect-video bg-black/10 dark:bg-default/20 flex-none rounded-t-4xl' />
-      <ScrollShadow className='h-full flex flex-col gap-6 p-6'>
-        <Text tag='h1' content={currentRoom.name} />
-        <div className='flex flex-row flex-wrap gap-2'>
-          <Chip
-            title={translate.menu.content.room.owner}
-            content={currentRoom.owner}
-          />
-          <Chip
-            title={translate.menu.content.room.items}
-            content={currentRoomItems.length}
+    <div className='w-full h-full flex flex-col relative'>
+      <ScrollShadow
+        hideScrollBar
+        className='w-full h-full flex flex-col flex-shrink'
+      >
+        <div className='w-hull aspect-video bg-black/10 dark:bg-default/20 flex-none rounded-t-4xl' />
+        <div className='h-full flex flex-col gap-6 p-6'>
+          <Text tag='h1' content={currentRoom.name} />
+          <div className='flex flex-row flex-wrap gap-2'>
+            <Chip
+              title={translate.menu.content.room.owner}
+              content={currentRoom.owner}
+            />
+            <Chip
+              title={translate.menu.content.room.items}
+              content={currentRoomItems.length}
+            />
+          </div>
+          <RoomItemsList
+            translate={translate}
+            roomItems={currentRoomItems}
+            groupSelected={groupSelected}
+            setGroupSelected={setGroupSelected}
           />
         </div>
-        <RoomItemsList
-          roomItems={currentRoomItems}
-          groupSelected={groupSelected}
-          setGroupSelected={setGroupSelected}
-        />
       </ScrollShadow>
+
       <Injector
         translate={translate}
         isItemSelected={isItemSelected}
-        selectedItemsLength={groupSelected.length}
+        selectedItems={groupSelected}
       />
     </div>
   );

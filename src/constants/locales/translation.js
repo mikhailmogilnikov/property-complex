@@ -25,6 +25,9 @@ export default function translation() {
         room: {
           owner: menu('content.room.owner'),
           items: menu('content.room.items'),
+          modal: {
+            removeItem: menu('content.room.modal.removeItem'),
+          },
         },
       },
     },

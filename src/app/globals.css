@@ -6,6 +6,9 @@
   .shadow-base {
     box-shadow: 0 0 60px 0px rgba(0, 0, 0, 0.15);
   }
+  .scroll-touch {
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 :root {

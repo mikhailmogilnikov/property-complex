@@ -57,11 +57,11 @@ function Navigation({ activeTab, setActiveTab }) {
   }
 
   return (
-    <div className='h-16 flex flex-row flex-shrink-0'>
+    <nav className='h-16 flex flex-row flex-shrink-0'>
       <NavButton name={strings.menu.states.list} />
       <NavButton name={strings.menu.states.locations} />
       <NavButton name={strings.menu.states.profile} />
-    </div>
+    </nav>
   );
 }
 
