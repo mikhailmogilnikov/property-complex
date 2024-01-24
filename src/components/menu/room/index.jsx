@@ -24,6 +24,32 @@ const Room = observer(({ translate }) => {
     (item) => currentRoomId === item.roomId,
   );
 
+  const selectedItemsList = groupSelected.map((id) =>
+    items.find((item) => id === item.id),
+  );
+
+  const unpinItem = (itemId) => {
+    setGroupSelected((prev) => prev.filter(prevId => prevId !== itemId));
+  }
+
+  const moveItems = () => {
+    const endpointRoomId = 3;
+
+    const newItemsState = items.map((item) => 
+      (
+        groupSelected.includes(item.id)
+          ? {...item, roomId: endpointRoomId}
+          : item
+      )
+    );
+
+    databaseStore.setItems(newItemsState);
+    setGroupSelected([]);
+
+
+    console.log(newItemsState);
+  }  
+
   const isItemSelected = groupSelected.length > 0;
 
   return (
@@ -58,6 +84,9 @@ const Room = observer(({ translate }) => {
         translate={translate}
         isItemSelected={isItemSelected}
         selectedItems={groupSelected}
+        selectedItemsList={selectedItemsList}
+        unpinItem={unpinItem}
+        moveItems={moveItems}
       />
     </div>
   );
