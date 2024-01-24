@@ -45,7 +45,10 @@ function Map() {
     const manualTransform = d3.zoomIdentity.scale(0.5).translate(500, 50);
     g.attr('transform', manualTransform);
 
-    const zoomHandler = d3.zoom().on('zoom', (event) => {
+    const zoomHandler = d3
+      .zoom()
+      .scaleExtent([0.1, 6])
+      .on('zoom', (event) => {
       g.attr('transform', event.transform);
     });
     svg.call(zoomHandler);
@@ -130,18 +133,24 @@ function Map() {
           .attr('fill', colors.fill);
       })
       .on('mousedown', function () {
-        getPathFill(this)
+        const path = getPathFill(this);
+        path
           .transition()
           .duration(100)
           .ease(d3.easeLinear)
-          .attr('fill', colors.mousedown.fill);
-      })
-      .on('mouseup', function () {
-        getPathFill(this)
+          .attr('fill', colors.mousedown.fill)
           .transition()
           .duration(100)
           .ease(d3.easeLinear)
           .attr('fill', colors.hover.fill);
+      })
+      .on('mouseup', () => {
+        console.log('mouseup');
+        getPathFill(this)
+          .transition()
+          .duration(100)
+          .ease(d3.easeLinear)
+          .attr('fill', '#fff');
       });
   }, [svgContent, theme]);
 
