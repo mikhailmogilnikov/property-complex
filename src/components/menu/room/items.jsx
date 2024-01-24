@@ -46,17 +46,20 @@ function RoomItemsList({
                       <Text
                         tag='p'
                         className='opacity-50 underline'
-                        content='Подробнее'
+                        content={translate.menu.content.room.popover.placeholder}
                       />
                     </button>
                   </PopoverTrigger>
                   <PopoverContent>
                     <div className='px-1 py-2'>
                       <div className='text-small font-bold'>
-                        Popover Content
+                        {item.name}
                       </div>
                       <div className='text-tiny'>
-                        This is the popover content
+                        {`${translate.menu.content.room.popover.cost}: ${item.cost}`}
+                      </div>
+                      <div className='text-tiny'>
+                        {`${translate.menu.content.room.popover.lifetime}: ${item.lifetime}`}
                       </div>
                     </div>
                   </PopoverContent>

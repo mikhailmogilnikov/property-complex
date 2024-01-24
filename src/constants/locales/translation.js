@@ -25,6 +25,11 @@ export default function translation() {
         room: {
           owner: menu('content.room.owner'),
           items: menu('content.room.items'),
+          popover: {
+            placeholder: menu('content.room.popover.placeholder'),
+            cost: menu('content.room.popover.cost'),
+            lifetime: menu('content.room.popover.lifetime')
+          },
           modal: {
             removeItem: menu('content.room.modal.removeItem'),
           },
