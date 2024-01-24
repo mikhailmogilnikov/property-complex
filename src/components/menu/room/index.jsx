@@ -1,5 +1,5 @@
 import { ScrollShadow } from '@nextui-org/scroll-shadow';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '@/store/store';
 import Text from '@/components/primitives/Text';
@@ -10,6 +10,10 @@ import Injector from './Injector';
 const Room = observer(({ translate }) => {
   const { menuStore, databaseStore } = useStore();
   const [groupSelected, setGroupSelected] = useState([]);
+
+  useEffect(() => {
+    setGroupSelected([]);
+  }, [menuStore.getActiveRoom()]);
 
   const currentRoomId = menuStore.getActiveRoom();
   const rooms = databaseStore.getRooms();
