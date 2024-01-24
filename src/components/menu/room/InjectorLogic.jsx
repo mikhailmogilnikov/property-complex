@@ -1,5 +1,7 @@
 import { Button } from '@nextui-org/button';
 import { Tooltip } from '@nextui-org/tooltip';
+import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@nextui-org/react";
+import { useMemo, useState } from 'react';
 import Breaker from '@/components/primitives/Breaker';
 import Text from '@/components/primitives/Text';
 import icons from '@/constants/icons';
@@ -46,7 +48,19 @@ function SelectedItems({
   );
 }
 
-function LocationPicker({ translate }) {
+
+function LocationPicker({ translate, locations, currentLocationId }) {
+  const locs = useMemo(() => locations.map((loc) => loc.name), [locations]);
+  const initLoc = useMemo(() => locations.find((loc) => loc.id === currentLocationId)?.name, [locs, currentLocationId]);
+
+  const [selectedKeys, setSelectedKeys] = useState(new Set(initLoc ? [initLoc] : []));
+
+  const selectedValue = useMemo(
+    () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
+    [selectedKeys]
+  );
+
+
   return (
     <div className='flex flex-col gap-3'>
       <Text
@@ -54,7 +68,28 @@ function LocationPicker({ translate }) {
         className='opacity-60'
         content={translate.menu.content.room.modal.roomPickerTitle}
       />
-      <Button variant='flat' className='w-full'>4 этаж</Button>
+      <Dropdown className='w-full'>
+        <DropdownTrigger>
+          <Button 
+            variant="bordered" 
+            className="capitalize"
+          >
+            {selectedValue}
+          </Button>
+        </DropdownTrigger>
+        <DropdownMenu 
+          aria-label="Single selection example"
+          variant="flat"
+          disallowEmptySelection
+          selectionMode="single"
+          selectedKeys={selectedKeys}
+          onSelectionChange={setSelectedKeys}
+        >
+          {locs.map((loc) => 
+            <DropdownItem key={loc}>{loc}</DropdownItem>
+          )}
+        </DropdownMenu>
+      </Dropdown>
     </div>
   );
 }
@@ -76,6 +111,8 @@ function InjectorLogic({
   selectedItemsIds,
   selectedItemsList,
   unpinItem,
+  locations,
+  currentLocationId
 }) {
   return (
     <div className='flex flex-col gap-6'>
@@ -85,7 +122,7 @@ function InjectorLogic({
         selectedItemsIds={selectedItemsIds}
         unpinItem={unpinItem}
       />
-      <LocationPicker translate={translate} />
+      <LocationPicker translate={translate} locations={locations} currentLocationId={currentLocationId}/>
       <RoomsNavigator translate={translate} />
     </div>
   );
