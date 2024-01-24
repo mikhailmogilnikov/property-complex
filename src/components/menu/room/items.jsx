@@ -10,7 +10,7 @@ function RoomItemsList({
   setGroupSelected,
 }) {
   return (
-    <div className='w-full flex flex-col gap-3 mt-4'>
+    <div className='w-full flex flex-col gap-3 mt-4 pb-4'>
       <h4 className='font-medium text-sm px-1'>
         {translate.menu.content.room.items}
       </h4>
