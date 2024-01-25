@@ -27,6 +27,7 @@ function InjectModal({
   isAction,
   setIsAction,
   setGroupSelected,
+  downloadTransferReportGeneration
 }) {
   const [selectedRoomId, setSelectedRoomId] = useState(null);
 
@@ -36,6 +37,14 @@ function InjectModal({
       setIsAction(true);
     }
   };
+
+
+  const action = () => {
+    if(isAction)
+      downloadTransferReportGeneration(selectedRoomId);
+    else
+      actionMoveItem(selectedRoomId);
+  }
 
   useEffect(() => {
     if (isAction) {
@@ -86,7 +95,7 @@ function InjectModal({
 
               <Button
                 color={isAction ? 'success' : 'primary'}
-                onClick={() => actionMoveItem()}
+                onClick={action}
                 isDisabled={selectedRoomId === null}
                 className='text-white font-medium'
               >
@@ -114,6 +123,7 @@ function Injector({
   getRoomsInFloor,
   currentRoomId,
   setGroupSelected,
+  downloadTransferReportGeneration
 }) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const [isAction, setIsAction] = useState(false);
@@ -155,6 +165,7 @@ function Injector({
             isAction={isAction}
             setIsAction={setIsAction}
             setGroupSelected={setGroupSelected}
+            downloadTransferReportGeneration={downloadTransferReportGeneration}
           />
         </motion.div>
       )}
