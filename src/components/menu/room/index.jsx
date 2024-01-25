@@ -36,15 +36,12 @@ const Room = observer(({ translate }) => {
     setGroupSelected((prev) => prev.filter((prevId) => prevId !== itemId));
   };
 
-  const moveItems = () => {
-    const endpointRoomId = 3;
-
+  const moveItems = (endpointRoomId) => {
     const newItemsState = items.map((item) =>
       groupSelected.includes(item.id)
-        ? { ...item, roomId: endpointRoomId }
+        ? { ...item, roomId: Number(endpointRoomId) }
         : item,
     );
-
     databaseStore.setItems(newItemsState);
     setGroupSelected([]);
   };
@@ -56,7 +53,6 @@ const Room = observer(({ translate }) => {
     return rooms.filter((room) => room.locationId === locId);
   }
     
-
   return (
     <div className='w-full h-full flex flex-col overflow-hidden relative'>
       <ScrollShadow
@@ -102,6 +98,7 @@ const Room = observer(({ translate }) => {
         locations={locations}
         currentLocationId={currentLocationId}
         getRoomsInFloor={getRoomsInFloor}
+        currentRoomId={currentRoomId}
       />
     </div>
   );

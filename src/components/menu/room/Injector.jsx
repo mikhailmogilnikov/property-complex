@@ -9,7 +9,7 @@ import {
   useDisclosure,
 } from '@nextui-org/modal';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import InjectorLogic from './InjectorLogic';
 
 function InjectModal({
@@ -22,8 +22,19 @@ function InjectModal({
   moveItems,
   locations,
   currentLocationId,
-  getRoomsInFloor
+  getRoomsInFloor,
+  currentRoomId
 }) {
+  
+  const [selectedRoomId, setSelectedRoomId] = useState(null);
+
+  const actionMoveItem = (onClose) => {
+    if(selectedRoomId !== null) {
+      moveItems(selectedRoomId);
+      onClose();
+    }
+  }
+
   return (
     <Modal
       scrollBehavior='inside'
@@ -47,13 +58,19 @@ function InjectModal({
                 locations={locations}
                 currentLocationId={currentLocationId}
                 getRoomsInFloor={getRoomsInFloor}
+                currentRoomId={currentRoomId}
+                setSelectedRoomId={setSelectedRoomId}
               />
             </ModalBody>
             <ModalFooter>
               <Button color='danger' variant='light' onPress={onClose}>
                 Close
               </Button>
-              <Button color='primary' onPress={onClose} onClick={moveItems}>
+              <Button 
+              color='primary' 
+              onClick={() => actionMoveItem(onClose)}
+              isDisabled={selectedRoomId === null}
+              >
                 Action
               </Button>
             </ModalFooter>
@@ -73,7 +90,8 @@ function Injector({
   moveItems,
   locations,
   currentLocationId,
-  getRoomsInFloor
+  getRoomsInFloor,
+  currentRoomId
 }) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
@@ -110,6 +128,7 @@ function Injector({
             locations={locations}
             currentLocationId={currentLocationId}
             getRoomsInFloor={getRoomsInFloor}
+            currentRoomId={currentRoomId}
           />
         </motion.div>
       )}
