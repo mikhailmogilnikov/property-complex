@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="731" height="228" fill="none" viewBox="0 0 731 228">
   <g class="rooms">
-    <g class="415a">
+    <g class="415а">
       <path fill="#fff" d="M6 142h158v62H6v-62Z"/>
       <path stroke="#000" stroke-width="12" d="M6 142h158v62H6v-62Z"/>
       <path stroke="#000" stroke-width="4" d="M150 159h28" class="door"/>
     </g>
-    <g class="415b">
+    <g class="415б">
       <path fill="#fff" d="M6 6h248v132H6V6Z"/>
       <path stroke="#000" stroke-width="12" d="M6 6h248v132H6V6Z"/>
       <path stroke="#000" stroke-width="4" d="M207 151v-28" class="door"/>
