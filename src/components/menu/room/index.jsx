@@ -8,6 +8,7 @@ import Text from '@/components/primitives/Text';
 import RoomItemsList from './items';
 import Chip from '@/components/primitives/Chip';
 import Injector from './Injector';
+import transferReportGeneration from '@/utility/transferReportGeneration';
 
 const Room = observer(({ translate }) => {
   const { menuStore, databaseStore, galleryStore } = useStore();
@@ -44,8 +45,8 @@ const Room = observer(({ translate }) => {
         : item,
     );
     databaseStore.setItems(newItemsState);
-    // setGroupSelected([]);
   };
+
 
   const isItemSelected = groupSelected.length > 0;
 
@@ -60,6 +61,18 @@ const Room = observer(({ translate }) => {
     galleryStore.setSelectedId(id);
     galleryStore.setImageLink(link);
   };
+
+  const downloadTransferReportGeneration = (endpointRoomId) => {
+    const newRoom = rooms.find((r) => r.id === Number(endpointRoomId));
+
+    transferReportGeneration({
+      itemsList: selectedItemsList.map(item => item.name),
+        currentResponsible: currentRoom.owner,
+        newResponsible: newRoom.owner !== currentRoom.owner
+          ? newRoom.owner
+          : null
+    });
+  }
 
   return (
     <div className='w-full h-full flex flex-col overflow-hidden relative'>
@@ -112,6 +125,7 @@ const Room = observer(({ translate }) => {
         getRoomsInFloor={getRoomsInFloor}
         currentRoomId={currentRoomId}
         setGroupSelected={setGroupSelected}
+        downloadTransferReportGeneration={downloadTransferReportGeneration}
       />
     </div>
   );

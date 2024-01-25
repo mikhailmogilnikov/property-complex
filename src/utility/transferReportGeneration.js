@@ -12,7 +12,7 @@ const transferReportGeneration = ({itemsList, currentResponsible, newResponsible
     
     const newResponsibleText = isNew 
         ?
-        `Новый материально ответственный: ${currentResponsible}`
+        `Новый материально ответственный: ${newResponsible}`
         :
         '';
 
@@ -22,7 +22,7 @@ const transferReportGeneration = ({itemsList, currentResponsible, newResponsible
 ${currentResponsibleText}
 ${newResponsibleText}
 ## Список перенесенных предметов
-${itemsList.map((item, index) => `- ${index + 1}. ${item}`).join('\n')}`;
+${itemsList.map((item, index) => `${index + 1}. ${item}`).join('\n')}`;
 
     const blob = new Blob([reportContent], { type: 'text/markdown' });
     const url = URL.createObjectURL(blob);
