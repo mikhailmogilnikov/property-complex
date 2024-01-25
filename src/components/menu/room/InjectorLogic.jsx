@@ -9,7 +9,7 @@ import {
 import {
   Autocomplete,
   // AutocompleteSection,
-  // AutocompleteItem,
+  AutocompleteItem,
 } from '@nextui-org/autocomplete';
 import { useMemo, useState } from 'react';
 import { ScrollShadow } from '@nextui-org/scroll-shadow';
@@ -65,21 +65,7 @@ function SelectedItems({
   );
 }
 
-function LocationPicker({ translate, locations, currentLocationId }) {
-  const locs = useMemo(() => locations.map((loc) => loc.name), [locations]);
-  const initLoc = useMemo(
-    () => locations.find((loc) => loc.id === currentLocationId)?.name,
-    [locs, currentLocationId],
-  );
-
-  const [selectedKeys, setSelectedKeys] = useState(
-    new Set(initLoc ? [initLoc] : []),
-  );
-
-  const selectedValue = useMemo(
-    () => Array.from(selectedKeys).join(', ').replaceAll('_', ' '),
-    [selectedKeys],
-  );
+function LocationPicker({ translate, selectedValue, selectedKeys, setSelectedKeys, locs }) {
 
   return (
     <div className='flex flex-col gap-3'>
@@ -118,7 +104,7 @@ function LocationPicker({ translate, locations, currentLocationId }) {
   );
 }
 
-function RoomsNavigator({ translate }) {
+function RoomsNavigator({ translate, selectedRoomList, currentRoomId, setSelectedRoomId }) {
   return (
     <div className='flex flex-col gap-3'>
       <Text
@@ -127,6 +113,7 @@ function RoomsNavigator({ translate }) {
         content={translate.menu.content.room.modal.navigatorTitle}
       />
       <Autocomplete
+        onSelectionChange={setSelectedRoomId}
         aria-label='Select an room'
         placeholder='Поиск по комнатам'
         startContent={
@@ -142,11 +129,15 @@ function RoomsNavigator({ translate }) {
           },
         }}
       >
-        {/* {animals.map((animal) => (
-          <AutocompleteItem key={animal.value} value={animal.value}>
-            {animal.label}
+        {selectedRoomList.map((room) => (
+          <AutocompleteItem
+            key={room.id} 
+            value={room.name}
+            isReadOnly={room.id === currentRoomId}
+           >
+            {room.name}
           </AutocompleteItem>
-        ))} */}
+        ))}
       </Autocomplete>
     </div>
   );
@@ -160,7 +151,29 @@ function InjectorLogic({
   locations,
   currentLocationId,
   getRoomsInFloor,
+  currentRoomId,
+  setSelectedRoomId,
 }) {
+
+  
+
+  const locs = useMemo(() => locations.map((loc) => loc.name), [locations]);
+  const initLoc = useMemo(
+    () => locations.find((loc) => loc.id === currentLocationId)?.name,
+    [locs, currentLocationId],
+  );
+
+  const [selectedKeys, setSelectedKeys] = useState(
+    new Set(initLoc ? [initLoc] : []),
+  );
+
+  const selectedValue = useMemo(
+    () => Array.from(selectedKeys).join(', ').replaceAll('_', ' '),
+    [selectedKeys],
+  );
+
+  const selectedRoomList = useMemo(() => getRoomsInFloor(selectedValue), [selectedValue]);
+
   return (
     <ScrollShadow className='flex flex-col gap-10 px-5 py-3'>
       <SelectedItems
@@ -172,9 +185,17 @@ function InjectorLogic({
       <LocationPicker
         translate={translate}
         locations={locations}
-        currentLocationId={currentLocationId}
+        selectedValue={selectedValue}
+        selectedKeys={selectedKeys}
+        setSelectedKeys={setSelectedKeys}
+        locs={locs}
       />
-      <RoomsNavigator translate={translate} getRoomsInFloor={getRoomsInFloor} />
+      <RoomsNavigator 
+        translate={translate} 
+        selectedRoomList={selectedRoomList}
+        currentRoomId={currentRoomId}
+        setSelectedRoomId={setSelectedRoomId}
+      />
     </ScrollShadow>
   );
 }

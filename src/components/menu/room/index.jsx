@@ -37,23 +37,22 @@ const Room = observer(({ translate }) => {
     setGroupSelected((prev) => prev.filter((prevId) => prevId !== itemId));
   };
 
-  const moveItems = () => {
-    const endpointRoomId = 3;
-
+  const moveItems = (endpointRoomId) => {
     const newItemsState = items.map((item) =>
       groupSelected.includes(item.id)
-        ? { ...item, roomId: endpointRoomId }
+        ? { ...item, roomId: Number(endpointRoomId) }
         : item,
     );
-
     databaseStore.setItems(newItemsState);
     setGroupSelected([]);
   };
 
   const isItemSelected = groupSelected.length > 0;
 
-  const getRoomsInFloor = (locId) =>
-    rooms.filter((room) => room.locationId === locId);
+  const getRoomsInFloor = (locName) => {
+    const locId = locations.find((loc) => loc.name === locName).id;
+    return rooms.filter((room) => room.locationId === locId);
+  };
 
   const imageLink = `/images/4th-floor/${currentRoom.name}.jpg`;
 
@@ -111,6 +110,7 @@ const Room = observer(({ translate }) => {
         locations={locations}
         currentLocationId={currentLocationId}
         getRoomsInFloor={getRoomsInFloor}
+        currentRoomId={currentRoomId}
       />
     </div>
   );
