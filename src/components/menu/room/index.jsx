@@ -51,8 +51,11 @@ const Room = observer(({ translate }) => {
 
   const isItemSelected = groupSelected.length > 0;
 
-  const getRoomsInFloor = (locId) =>
-    rooms.filter((room) => room.locationId === locId);
+  const getRoomsInFloor = (locName) => {
+    const locId = locations.find((loc) => loc.name === locName).id;
+    return rooms.filter((room) => room.locationId === locId);
+  }
+    
 
   return (
     <div className='w-full h-full flex flex-col overflow-hidden relative'>

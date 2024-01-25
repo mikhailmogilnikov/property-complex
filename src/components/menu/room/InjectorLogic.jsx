@@ -65,21 +65,7 @@ function SelectedItems({
   );
 }
 
-function LocationPicker({ translate, locations, currentLocationId }) {
-  const locs = useMemo(() => locations.map((loc) => loc.name), [locations]);
-  const initLoc = useMemo(
-    () => locations.find((loc) => loc.id === currentLocationId)?.name,
-    [locs, currentLocationId],
-  );
-
-  const [selectedKeys, setSelectedKeys] = useState(
-    new Set(initLoc ? [initLoc] : []),
-  );
-
-  const selectedValue = useMemo(
-    () => Array.from(selectedKeys).join(', ').replaceAll('_', ' '),
-    [selectedKeys],
-  );
+function LocationPicker({ translate, selectedValue, selectedKeys, setSelectedKeys, locs }) {
 
   return (
     <div className='flex flex-col gap-3'>
@@ -149,6 +135,25 @@ function InjectorLogic({
   currentLocationId,
   getRoomsInFloor
 }) {
+
+  const locs = useMemo(() => locations.map((loc) => loc.name), [locations]);
+  const initLoc = useMemo(
+    () => locations.find((loc) => loc.id === currentLocationId)?.name,
+    [locs, currentLocationId],
+  );
+
+  const [selectedKeys, setSelectedKeys] = useState(
+    new Set(initLoc ? [initLoc] : []),
+  );
+
+  const selectedValue = useMemo(
+    () => Array.from(selectedKeys).join(', ').replaceAll('_', ' '),
+    [selectedKeys],
+  );
+
+  const selectedRoomList = useMemo(() => getRoomsInFloor(selectedValue), [selectedValue]);
+  console.log({selectedRoomList});
+  
   return (
     <ScrollShadow className='flex flex-col gap-10 px-5 py-3'>
       <SelectedItems
@@ -160,9 +165,16 @@ function InjectorLogic({
       <LocationPicker
         translate={translate}
         locations={locations}
-        currentLocationId={currentLocationId}
+        selectedValue={selectedValue}
+        selectedKeys={selectedKeys}
+        setSelectedKeys={setSelectedKeys}
+        locs={locs}
       />
-      <RoomsNavigator translate={translate} getRoomsInFloor={getRoomsInFloor} />
+      <RoomsNavigator 
+      translate={translate} 
+      getRoomsInFloor={getRoomsInFloor} 
+      
+      />
     </ScrollShadow>
   );
 }
