@@ -51,6 +51,9 @@ const Room = observer(({ translate }) => {
 
   const isItemSelected = groupSelected.length > 0;
 
+  const getRoomsInFloor = (locId) =>
+    rooms.filter((room) => room.locationId === locId);
+
   return (
     <div className='w-full h-full flex flex-col overflow-hidden relative'>
       <ScrollShadow
@@ -95,6 +98,7 @@ const Room = observer(({ translate }) => {
         moveItems={moveItems}
         locations={locations}
         currentLocationId={currentLocationId}
+        getRoomsInFloor={getRoomsInFloor}
       />
     </div>
   );

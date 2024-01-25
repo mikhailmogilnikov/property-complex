@@ -6,6 +6,11 @@ import {
   DropdownMenu,
   DropdownItem,
 } from '@nextui-org/dropdown';
+import {
+  Autocomplete,
+  // AutocompleteSection,
+  // AutocompleteItem,
+} from '@nextui-org/autocomplete';
 import { useMemo, useState } from 'react';
 import { ScrollShadow } from '@nextui-org/scroll-shadow';
 import Breaker from '@/components/primitives/Breaker';
@@ -31,7 +36,11 @@ function SelectedItems({
           <div key={`pin_${item.id}`}>
             <div className='h-min flex flex-row flex-none items-center text-start px-5 py-4 gap-4'>
               <div className='flex flex-col gap-3 w-full items-start'>
-                <Text tag='h5' className='select-text cursor-auto' content={item.name} />
+                <Text
+                  tag='h5'
+                  className='select-text cursor-auto'
+                  content={item.name}
+                />
                 <ItemInfoPopover translate={translate} item={item} />
               </div>
 
@@ -117,6 +126,16 @@ function RoomsNavigator({ translate }) {
         className='opacity-60'
         content={translate.menu.content.room.modal.navigatorTitle}
       />
+       <Autocomplete 
+        label="Select an animal" 
+        className="max-w-xs" 
+      >
+        {/* {animals.map((animal) => (
+          <AutocompleteItem key={animal.value} value={animal.value}>
+            {animal.label}
+          </AutocompleteItem>
+        ))} */}
+      </Autocomplete>
     </div>
   );
 }
@@ -128,6 +147,7 @@ function InjectorLogic({
   unpinItem,
   locations,
   currentLocationId,
+  getRoomsInFloor
 }) {
   return (
     <ScrollShadow className='flex flex-col gap-10 px-5 py-3'>
@@ -142,7 +162,7 @@ function InjectorLogic({
         locations={locations}
         currentLocationId={currentLocationId}
       />
-      <RoomsNavigator translate={translate} />
+      <RoomsNavigator translate={translate} getRoomsInFloor={getRoomsInFloor} />
     </ScrollShadow>
   );
 }

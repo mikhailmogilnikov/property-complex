@@ -22,6 +22,7 @@ function InjectModal({
   moveItems,
   locations,
   currentLocationId,
+  getRoomsInFloor
 }) {
   return (
     <Modal
@@ -45,6 +46,7 @@ function InjectModal({
                 unpinItem={unpinItem}
                 locations={locations}
                 currentLocationId={currentLocationId}
+                getRoomsInFloor={getRoomsInFloor}
               />
             </ModalBody>
             <ModalFooter>
@@ -71,6 +73,7 @@ function Injector({
   moveItems,
   locations,
   currentLocationId,
+  getRoomsInFloor
 }) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
@@ -106,6 +109,7 @@ function Injector({
             moveItems={moveItems}
             locations={locations}
             currentLocationId={currentLocationId}
+            getRoomsInFloor={getRoomsInFloor}
           />
         </motion.div>
       )}
