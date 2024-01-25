@@ -2,6 +2,7 @@ import { ScrollShadow } from '@nextui-org/scroll-shadow';
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { useStore } from '@/store/store';
 import Text from '@/components/primitives/Text';
 import RoomItemsList from './items';
@@ -9,7 +10,7 @@ import Chip from '@/components/primitives/Chip';
 import Injector from './Injector';
 
 const Room = observer(({ translate }) => {
-  const { menuStore, databaseStore } = useStore();
+  const { menuStore, databaseStore, galleryStore } = useStore();
   const [groupSelected, setGroupSelected] = useState([]);
 
   useEffect(() => {
@@ -54,20 +55,31 @@ const Room = observer(({ translate }) => {
   const getRoomsInFloor = (locId) =>
     rooms.filter((room) => room.locationId === locId);
 
+  const imageLink = `/images/4th-floor/${currentRoom.name}.jpg`;
+
+  const setGalleryImage = (id, link) => {
+    galleryStore.setSelectedId(id);
+    galleryStore.setImageLink(link);
+  };
+
   return (
     <div className='w-full h-full flex flex-col overflow-hidden relative'>
       <ScrollShadow
         hideScrollBar
         className='w-full h-full flex flex-col flex-shrink rounded-t-4xl'
       >
-        <div className='w-hull aspect-video w-auto h-auto bg-black/10 overflow-hidden dark:bg-default/20 flex-none rounded-t-4xl'>
+        <motion.button
+          type='button'
+          onClick={() => setGalleryImage(currentRoom.id, imageLink)}
+          className='w-hull aspect-video w-auto h-auto bg-black/10 overflow-hidden dark:bg-default/20 flex-none rounded-t-4xl'
+        >
           <Image
-            src={`/images/4th-floor/${currentRoom.name}.jpg`}
+            src={imageLink}
             width={384}
             height={216}
             alt={currentRoom.name}
           />
-        </div>
+        </motion.button>
         <div className='h-full flex flex-col gap-6 p-6'>
           <Text tag='h1' content={currentRoom.name} />
           <div className='flex flex-row flex-wrap gap-2'>
