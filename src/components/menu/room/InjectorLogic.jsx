@@ -153,6 +153,7 @@ function InjectorLogic({
   getRoomsInFloor,
   currentRoomId,
   setSelectedRoomId,
+  isAction
 }) {
 
   
@@ -181,21 +182,29 @@ function InjectorLogic({
         selectedItemsList={selectedItemsList}
         selectedItemsIds={selectedItemsIds}
         unpinItem={unpinItem}
+        isAction={isAction}
       />
-      <LocationPicker
+      {
+        !isAction
+        &&
+        <LocationPicker
         translate={translate}
         locations={locations}
         selectedValue={selectedValue}
         selectedKeys={selectedKeys}
         setSelectedKeys={setSelectedKeys}
         locs={locs}
-      />
-      <RoomsNavigator 
-        translate={translate} 
-        selectedRoomList={selectedRoomList}
-        currentRoomId={currentRoomId}
-        setSelectedRoomId={setSelectedRoomId}
-      />
+      />}
+     {
+      !isAction
+      &&
+        <RoomsNavigator 
+          translate={translate} 
+          selectedRoomList={selectedRoomList}
+          currentRoomId={currentRoomId}
+          setSelectedRoomId={setSelectedRoomId}
+        />
+      }
     </ScrollShadow>
   );
 }

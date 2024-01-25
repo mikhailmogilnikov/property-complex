@@ -31,7 +31,9 @@
           "selectedItems": "Выбранные предметы",
           "removeItem": "Убрать предмет из списка",
           "roomPickerTitle": "Выбор локации",
-          "navigatorTitle": "Выбор помещения"
+          "navigatorTitle": "Выбор помещения",
+          "close": "Закрыть",
+          "action": "Переместить"
         }
       }
     }

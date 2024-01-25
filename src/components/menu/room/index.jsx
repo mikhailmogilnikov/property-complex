@@ -43,7 +43,7 @@ const Room = observer(({ translate }) => {
         : item,
     );
     databaseStore.setItems(newItemsState);
-    setGroupSelected([]);
+    // setGroupSelected([]);
   };
 
   const isItemSelected = groupSelected.length > 0;
@@ -99,6 +99,7 @@ const Room = observer(({ translate }) => {
         currentLocationId={currentLocationId}
         getRoomsInFloor={getRoomsInFloor}
         currentRoomId={currentRoomId}
+        setGroupSelected={setGroupSelected}
       />
     </div>
   );

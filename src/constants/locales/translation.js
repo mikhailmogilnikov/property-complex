@@ -37,6 +37,8 @@ export default function translation() {
             removeItem: menu('content.room.modal.removeItem'),
             roomPickerTitle: menu('content.room.modal.roomPickerTitle'),
             navigatorTitle: menu('content.room.modal.navigatorTitle'),
+            close: menu('content.room.modal.close'),
+            action: menu('content.room.modal.action')
           },
         },
       },
