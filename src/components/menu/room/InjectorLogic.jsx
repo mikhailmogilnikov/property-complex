@@ -130,6 +130,7 @@ function RoomsNavigator({
         content={translate.menu.content.room.modal.navigatorTitle}
       />
       <Autocomplete
+        
         onSelectionChange={setSelectedRoomId}
         aria-label='Select an room'
         placeholder='Поиск по комнатам'
@@ -148,10 +149,7 @@ function RoomsNavigator({
         }}
       >
         {selectedRoomList.map((room) => (
-          <AutocompleteItem
-            key={room.id}
-            value={room.name}
-          >
+          <AutocompleteItem key={room.id} value={room.name}>
             {room.name}
           </AutocompleteItem>
         ))}

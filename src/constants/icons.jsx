@@ -8,6 +8,7 @@ import {
   PiPackageBold,
   PiXCircleBold,
   PiMinusBold,
+  PiTranslateBold,
 } from 'react-icons/pi';
 import { TbMap2 } from 'react-icons/tb';
 
@@ -28,6 +29,9 @@ export default {
         modal: {
           minus: <PiMinusBold className='w-5 h-5' />,
         },
+      },
+      settings: {
+        localization: <PiTranslateBold size={100} />,
       },
     },
     nav: {
