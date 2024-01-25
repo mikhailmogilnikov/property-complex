@@ -6,6 +6,7 @@
         "hidden": "Показать меню"
       },
       "injectButton": "Перенос предметов"
+      
     },
     "title": {
       "name": "Имущественный комплекс",
@@ -29,6 +30,7 @@
         },
         "modal": {
           "selectedItems": "Выбранные предметы",
+          "successItems": "Перенесённые предметы",
           "removeItem": "Убрать предмет из списка",
           "roomPickerTitle": "Выбор локации",
           "navigatorTitle": "Выбор помещения",

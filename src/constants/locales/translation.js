@@ -34,11 +34,12 @@ export default function translation() {
           },
           modal: {
             selectedItems: menu('content.room.modal.selectedItems'),
+            successItems: menu('content.room.modal.successItems'),
             removeItem: menu('content.room.modal.removeItem'),
             roomPickerTitle: menu('content.room.modal.roomPickerTitle'),
             navigatorTitle: menu('content.room.modal.navigatorTitle'),
             close: menu('content.room.modal.close'),
-            action: menu('content.room.modal.action')
+            action: menu('content.room.modal.action'),
           },
         },
       },

@@ -23,13 +23,18 @@ function SelectedItems({
   selectedItemsList,
   selectedItemsIds,
   unpinItem,
+  isAction,
 }) {
   return (
     <div className='flex flex-col gap-3'>
       <Text
         tag='h5'
         className='opacity-60'
-        content={translate.menu.content.room.modal.selectedItems}
+        content={
+          isAction
+            ? translate.menu.content.room.modal.successItems
+            : translate.menu.content.room.modal.selectedItems
+        }
       />
       <div className='bg-white/30 dark:bg-default/30 rounded-2xl flex flex-col gap-0 overflow-clip overflow-y-visible shadow-small dark:shadow-none'>
         {selectedItemsList.map((item, itemIndex) => (
@@ -44,18 +49,20 @@ function SelectedItems({
                 <ItemInfoPopover translate={translate} item={item} />
               </div>
 
-              <Tooltip content={translate.menu.content.room.modal.removeItem}>
-                <Button
-                  radius='md'
-                  variant='flat'
-                  size='sm'
-                  isIconOnly
-                  className='flex flex-col gap-1'
-                  onClick={() => unpinItem(item.id)}
-                >
-                  {icons.menu.content.room.modal.minus}
-                </Button>
-              </Tooltip>
+              {!isAction && (
+                <Tooltip content={translate.menu.content.room.modal.removeItem}>
+                  <Button
+                    radius='md'
+                    variant='flat'
+                    size='sm'
+                    isIconOnly
+                    className='flex flex-col gap-1'
+                    onClick={() => unpinItem(item.id)}
+                  >
+                    {icons.menu.content.room.modal.minus}
+                  </Button>
+                </Tooltip>
+              )}
             </div>
             {itemIndex < selectedItemsIds.length - 1 && <Breaker />}
           </div>
@@ -65,8 +72,13 @@ function SelectedItems({
   );
 }
 
-function LocationPicker({ translate, selectedValue, selectedKeys, setSelectedKeys, locs }) {
-
+function LocationPicker({
+  translate,
+  selectedValue,
+  selectedKeys,
+  setSelectedKeys,
+  locs,
+}) {
   return (
     <div className='flex flex-col gap-3'>
       <Text
@@ -104,7 +116,12 @@ function LocationPicker({ translate, selectedValue, selectedKeys, setSelectedKey
   );
 }
 
-function RoomsNavigator({ translate, selectedRoomList, currentRoomId, setSelectedRoomId }) {
+function RoomsNavigator({
+  translate,
+  selectedRoomList,
+  currentRoomId,
+  setSelectedRoomId,
+}) {
   return (
     <div className='flex flex-col gap-3'>
       <Text
@@ -116,6 +133,7 @@ function RoomsNavigator({ translate, selectedRoomList, currentRoomId, setSelecte
         onSelectionChange={setSelectedRoomId}
         aria-label='Select an room'
         placeholder='Поиск по комнатам'
+        disabledKeys={[currentRoomId.toString()]}
         startContent={
           <div className='w-6 h-6 mr-1 opacity-60'>
             {icons.menu.content.list.search}
@@ -131,10 +149,9 @@ function RoomsNavigator({ translate, selectedRoomList, currentRoomId, setSelecte
       >
         {selectedRoomList.map((room) => (
           <AutocompleteItem
-            key={room.id} 
+            key={room.id}
             value={room.name}
-            isReadOnly={room.id === currentRoomId}
-           >
+          >
             {room.name}
           </AutocompleteItem>
         ))}
@@ -153,11 +170,8 @@ function InjectorLogic({
   getRoomsInFloor,
   currentRoomId,
   setSelectedRoomId,
-  isAction
+  isAction,
 }) {
-
-  
-
   const locs = useMemo(() => locations.map((loc) => loc.name), [locations]);
   const initLoc = useMemo(
     () => locations.find((loc) => loc.id === currentLocationId)?.name,
@@ -173,7 +187,10 @@ function InjectorLogic({
     [selectedKeys],
   );
 
-  const selectedRoomList = useMemo(() => getRoomsInFloor(selectedValue), [selectedValue]);
+  const selectedRoomList = useMemo(
+    () => getRoomsInFloor(selectedValue),
+    [selectedValue],
+  );
 
   return (
     <ScrollShadow className='flex flex-col gap-10 px-5 py-3'>
@@ -184,27 +201,24 @@ function InjectorLogic({
         unpinItem={unpinItem}
         isAction={isAction}
       />
-      {
-        !isAction
-        &&
+      {!isAction && (
         <LocationPicker
-        translate={translate}
-        locations={locations}
-        selectedValue={selectedValue}
-        selectedKeys={selectedKeys}
-        setSelectedKeys={setSelectedKeys}
-        locs={locs}
-      />}
-     {
-      !isAction
-      &&
-        <RoomsNavigator 
-          translate={translate} 
+          translate={translate}
+          locations={locations}
+          selectedValue={selectedValue}
+          selectedKeys={selectedKeys}
+          setSelectedKeys={setSelectedKeys}
+          locs={locs}
+        />
+      )}
+      {!isAction && (
+        <RoomsNavigator
+          translate={translate}
           selectedRoomList={selectedRoomList}
           currentRoomId={currentRoomId}
           setSelectedRoomId={setSelectedRoomId}
         />
-      }
+      )}
     </ScrollShadow>
   );
 }

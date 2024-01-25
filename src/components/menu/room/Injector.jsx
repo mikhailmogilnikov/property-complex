@@ -12,7 +12,6 @@ import {
 import { useEffect, useState } from 'react';
 import InjectorLogic from './InjectorLogic';
 
-
 function InjectModal({
   translate,
   isOpen,
@@ -27,20 +26,19 @@ function InjectModal({
   currentRoomId,
   isAction,
   setIsAction,
-  setGroupSelected
+  setGroupSelected,
 }) {
-  
   const [selectedRoomId, setSelectedRoomId] = useState(null);
 
   const actionMoveItem = () => {
-    if(selectedRoomId !== null) {
+    if (selectedRoomId !== null) {
       moveItems(selectedRoomId);
       setIsAction(true);
     }
-  }
+  };
 
   useEffect(() => {
-    if(isAction) {
+    if (isAction) {
       setIsAction(false);
       setGroupSelected([]);
     }
@@ -58,44 +56,43 @@ function InjectModal({
         {(onClose) => (
           <>
             <ModalHeader className='flex flex-col gap-1'>
-              {
-                isAction
-                  ?
-                  "Перенос завершен успешно"
-                  :
-                  translate.menu.tooltip.injectButton
-              }
+              {isAction
+                ? 'Перенос завершен успешно'
+                : translate.menu.tooltip.injectButton}
             </ModalHeader>
             <ModalBody className='p-0'>
-            <InjectorLogic
-              translate={translate}
-              selectedItemsIds={selectedItems}
-              selectedItemsList={selectedItemsList}
-              unpinItem={unpinItem}
-              locations={locations}
-              currentLocationId={currentLocationId}
-              getRoomsInFloor={getRoomsInFloor}
-              currentRoomId={currentRoomId}
-              setSelectedRoomId={setSelectedRoomId}
-              isAction={isAction}
-            />
+              <InjectorLogic
+                translate={translate}
+                selectedItemsIds={selectedItems}
+                selectedItemsList={selectedItemsList}
+                unpinItem={unpinItem}
+                locations={locations}
+                currentLocationId={currentLocationId}
+                getRoomsInFloor={getRoomsInFloor}
+                currentRoomId={currentRoomId}
+                setSelectedRoomId={setSelectedRoomId}
+                isAction={isAction}
+              />
             </ModalBody>
             <ModalFooter>
-              <Button color='danger' variant='light' onPress={onClose}>
+              <Button
+                color='default'
+                variant='flat'
+                className='font-medium'
+                onPress={onClose}
+              >
                 {translate.menu.content.room.modal.close}
               </Button>
-              <Button 
-              color='primary' 
-              onClick={() => actionMoveItem()}
-              isDisabled={selectedRoomId === null}
+
+              <Button
+                color={isAction ? 'success' : 'primary'}
+                onClick={() => actionMoveItem()}
+                isDisabled={selectedRoomId === null}
+                className='text-white font-medium'
               >
-                {
-                  isAction 
-                    ? 
-                    "Сформировать отчет" 
-                    : 
-                    translate.menu.content.room.modal.action
-                }
+                {isAction
+                  ? 'Сформировать отчет'
+                  : translate.menu.content.room.modal.action}
               </Button>
             </ModalFooter>
           </>
@@ -116,7 +113,7 @@ function Injector({
   currentLocationId,
   getRoomsInFloor,
   currentRoomId,
-  setGroupSelected
+  setGroupSelected,
 }) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const [isAction, setIsAction] = useState(false);
@@ -124,7 +121,7 @@ function Injector({
   useEffect(() => {
     if (isOpen) onClose();
   }, [isItemSelected]);
-  
+
   return (
     <AnimatePresence>
       {isItemSelected && (
