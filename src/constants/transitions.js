@@ -6,5 +6,6 @@ export default {
       open: { opacity: 1, x: 0, scale: 1 },
       closed: { opacity: 1, x: '-110%', scale: 1 },
     },
+    gallery: { type: 'spring', stiffness: 500, damping: 30 },
   },
 };
