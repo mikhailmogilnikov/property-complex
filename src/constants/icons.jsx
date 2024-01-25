@@ -6,7 +6,7 @@ import {
   PiCaretRightBold,
   PiKeyBold,
   PiPackageBold,
- 
+  PiXCircleBold,
   PiMinusBold,
 } from 'react-icons/pi';
 import { TbMap2 } from 'react-icons/tb';
@@ -24,6 +24,7 @@ export default {
         items: <PiPackageBold className='w-full h-full' />,
       },
       room: {
+        noItems: <PiXCircleBold className='w-full h-full' />,
         modal: {
           minus: <PiMinusBold className='w-5 h-5' />,
         },

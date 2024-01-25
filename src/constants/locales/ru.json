@@ -20,6 +20,7 @@
       "room": {
         "owner": "Мат. ответственный",
         "items": "Предметы",
+        "noItems": "Предметы отсутствуют",
         "popover": {
           "placeholder": "Подробнее",
           "inventoryNumber": "Инвентарный номер",
