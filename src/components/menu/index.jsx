@@ -121,7 +121,7 @@ const Menu = observer(({ translate }) => {
   const visibility = menuStore.getVisibility();
 
   return (
-    <motion.aside
+    <motion.menu
       initial='initial'
       animate={visibility ? 'open' : 'closed'}
       variants={transitions.menu.animationVariants}
@@ -146,7 +146,7 @@ const Menu = observer(({ translate }) => {
         translate={translate}
         toggleVisibility={menuStore.toggleVisibility}
       />
-    </motion.aside>
+    </motion.menu>
   );
 });
 

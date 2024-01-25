@@ -25,6 +25,7 @@ export default function translation() {
         room: {
           owner: menu('content.room.owner'),
           items: menu('content.room.items'),
+          noItems: menu('content.room.noItems'),
           popover: {
             placeholder: menu('content.room.popover.placeholder'),
             inventoryNumber: menu('content.room.popover.inventoryNumber'),
