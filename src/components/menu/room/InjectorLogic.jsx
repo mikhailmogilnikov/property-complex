@@ -126,9 +126,21 @@ function RoomsNavigator({ translate }) {
         className='opacity-60'
         content={translate.menu.content.room.modal.navigatorTitle}
       />
-       <Autocomplete 
-        label="Select an animal" 
-        className="max-w-xs" 
+      <Autocomplete
+        aria-label='Select an room'
+        placeholder='Поиск по комнатам'
+        startContent={
+          <div className='w-6 h-6 mr-1 opacity-60'>
+            {icons.menu.content.list.search}
+          </div>
+        }
+        className='w-full'
+        inputProps={{
+          classNames: {
+            inputWrapper: 'rounded-2xl px-4',
+            selectorButton: 'w-5 h-5',
+          },
+        }}
       >
         {/* {animals.map((animal) => (
           <AutocompleteItem key={animal.value} value={animal.value}>
@@ -147,7 +159,7 @@ function InjectorLogic({
   unpinItem,
   locations,
   currentLocationId,
-  getRoomsInFloor
+  getRoomsInFloor,
 }) {
   return (
     <ScrollShadow className='flex flex-col gap-10 px-5 py-3'>
