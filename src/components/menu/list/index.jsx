@@ -1,11 +1,55 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { useStore } from '@/store/store';
-import findSubstring from '@/utility/findSubstring';
 import Search from './Search';
 import ActualRooms from './ActualRooms';
+import useSearch, { createReqSearchObject } from '@/app/hooks/useSearch';
 
 function List({ translate }) {
   const { databaseStore } = useStore();
+
+
+  const ReqSearchObject = useMemo(() => createReqSearchObject([
+    ["rooms", "name"],
+    ["rooms", "owner"],
+    ["items", "id"],
+    ["items", "name", true],
+  ]), []);
+
+  const {searchValue, setSearchValue, returnedActualData} = useSearch({
+    dataList: {
+        "rooms": databaseStore.getRooms(),
+        "items": databaseStore.getItems()
+      },
+      reqList: ReqSearchObject,
+      mainDataId: "rooms"
+  });
+
+  /*
+  [
+        {
+          reqDataId: "rooms",
+          reqParamName: "name",
+          reqIsWave: false
+        },
+        {
+          reqDataId: "rooms",
+          reqParamName: "owner",
+          reqIsWave: false
+        },
+        {
+          reqDataId: "items",
+          reqParamName: "id",
+          reqIsWave: false
+        },
+        {
+          reqDataId: "items",
+          reqParamName: "name",
+          reqIsWave: true
+        },
+      ]
+  */
+
+  /*
   const [searchValue, setSearchValue] = useState('');
   const [foundList, setFoundList] = useState([]);
 
@@ -33,6 +77,7 @@ function List({ translate }) {
 
     setFoundList(foundData);
   }, [searchValue]);
+  */
 
   return (
     <div className='w-full h-full flex flex-col'>
@@ -41,7 +86,7 @@ function List({ translate }) {
         setSearchValue={setSearchValue}
         translate={translate}
       />
-      <ActualRooms foundList={foundList} />
+      <ActualRooms foundList={returnedActualData} />
     </div>
   );
 }
