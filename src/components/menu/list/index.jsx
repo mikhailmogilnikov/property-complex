@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useStore } from '@/store/store';
 import Search from './Search';
 import ActualRooms from './ActualRooms';
-import useSearch, { createReqSearchObject } from '@/app/hooks/useSearch';
+import useSearch, { createReqSearchObject } from '@/hooks/useSearch';
 
 function List({ translate }) {
   const { databaseStore } = useStore();
