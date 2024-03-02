@@ -12,5 +12,5 @@ Service for monitoring and accounting of enterprise property.
 - Tailwind CSS
 - Next UI
 - Next Themes
-- ESLint (Airbnb codestyle)
 - Framer Motion (Animations)
+- ESLint (Airbnb codestyle)
